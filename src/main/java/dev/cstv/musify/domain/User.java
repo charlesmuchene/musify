@@ -2,12 +2,26 @@ package dev.cstv.musify.domain;
 
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.*;
 
+@Entity
+@Table(name = "User")
 public class User {
+
+    @Id
+    @Column(name = "id")
     private Long id;
+
+    @Column(name = "firstName", nullable = false)
     private String firstName;
+
+    @Column(name = "lastName", nullable = false)
     private String lastName;
+
+    @Transient
     private UserCredentials userCredentials;
+
+    @Transient
     private List<Playlist> playlists = new ArrayList<Playlist>();
 
     public String getFirstName() {

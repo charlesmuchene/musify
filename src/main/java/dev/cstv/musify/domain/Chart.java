@@ -1,11 +1,21 @@
 package dev.cstv.musify.domain;
 
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
+@Entity
+@Table(name = "Chart")
 public class Chart {
+
+    @Id
+    @Column(name = "id")
     private Long id;
+
+    @Column(name = "name", nullable = false)
     private String name;
+
+    @Transient
     private List<Song> songs = new ArrayList<Song>();
 
     public String getName() {

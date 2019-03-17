@@ -1,12 +1,31 @@
 package dev.cstv.musify.domain;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name = "UserCredentials")
 public class UserCredentials {
+    @Id
+    @Column(name = "id")
     private Long id;
-    private String username;
-    private String password;
-    private String email;
-    private String verifyPassword;
+
+    @OneToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+    @JoinColumn(name ="id")
+    @Column(name = "user", nullable = false)
     private User user;
+
+    @Column(name = "username", nullable = false)
+    private String username;
+
+    @Column(name = "password", nullable = false)
+    private String password;
+
+    @Column(name = "email", nullable = false)
+    private String email;
+
+    @Transient
+    private String verifyPassword;
+
 
     public String getUsername() {
         return username;
