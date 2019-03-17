@@ -3,7 +3,7 @@ package dev.cstv.musify.domain;
 import java.util.Date;
 
 public class Song {
-
+    private Long id;
     private String title;
     private Genre genre;
     private Artist artist;

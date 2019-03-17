@@ -1,11 +1,13 @@
 package dev.cstv.musify.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class Genre {
+public class Playlist {
     private Long id;
     private String name;
-    private List<Song> songs;
+    private List<Song> songs = new ArrayList<Song>();
+    private User user;
 
     public String getName() {
         return name;
@@ -19,4 +21,11 @@ public class Genre {
         return songs;
     }
 
+    public void addSong(Song song) {
+        this.songs.add(song);
+    }
+
+    public User getUser() {
+        return user;
+    }
 }
