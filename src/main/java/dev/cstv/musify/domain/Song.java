@@ -1,14 +1,33 @@
 package dev.cstv.musify.domain;
 
+import javax.persistence.*;
 import java.util.Date;
 
+@Entity
+@Table(name = "Song")
 public class Song {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private Long id;
+
+    @Column(name = "title", length = 20, nullable = false)
     private String title;
+
+    @JoinColumn(name = "genre")
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Genre genre;
-    private Artist artist;
+
+    @Transient
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Album album;
+
+    @Column(name = "duration")
     private Integer duration;
+
+    @Temporal(TemporalType.DATE)
+    @Column(name = "releaseDate")
     private Date releaseDate;
 
     public String getTitle() {
@@ -25,14 +44,6 @@ public class Song {
 
     public void setGenre(Genre genre) {
         this.genre = genre;
-    }
-
-    public Artist getArtist() {
-        return artist;
-    }
-
-    public void setArtist(Artist artist) {
-        this.artist = artist;
     }
 
     public Album getAlbum() {
