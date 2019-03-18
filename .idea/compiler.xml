@@ -6,12 +6,12 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="EAProject" />
         <module name="musify" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="EAProject" target="6" />
+      <module name="musify" target="6" />
     </bytecodeTargetLevel>
   </component>
 </project>
