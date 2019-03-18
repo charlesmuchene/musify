@@ -15,15 +15,11 @@ public class Genre {
     @Column(name = "name", nullable = false)
     private String name;
 
-    @OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+    @Transient
+    @OneToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
     private List<Song> songs;
 
     public Genre() {
-    }
-
-    public Genre(String name, List<Song> songs) {
-        this.name = name;
-        this.songs = songs;
     }
 
     public Genre(String name) {

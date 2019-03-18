@@ -1,5 +1,8 @@
 package dev.cstv.musify.domain;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -28,7 +31,8 @@ public class Chart {
         this.name = name;
     }
 
-    @Transient
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "chart_songs",joinColumns = @JoinColumn(name = "chart_id"),inverseJoinColumns = @JoinColumn(name = "song_id"))
     private List<Song> songs = new ArrayList<Song>();
 
     public String getName() {
