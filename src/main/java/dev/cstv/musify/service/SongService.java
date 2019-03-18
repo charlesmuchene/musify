@@ -13,9 +13,6 @@ public interface SongService {
 
     public Song update(Song song);
 
-    public List<Song> findAllJoinFetch();
-
-    public List<Song> findAllSubSelect();
 
 
 }

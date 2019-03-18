@@ -5,13 +5,14 @@ import javax.persistence.*;
 @Entity
 @Table(name = "UserCredentials")
 public class UserCredentials {
+
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
 
     @OneToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     @JoinColumn(name ="id")
-    @Column(name = "user", nullable = false)
     private User user;
 
     @Column(name = "username", nullable = false)
@@ -26,6 +27,23 @@ public class UserCredentials {
     @Transient
     private String verifyPassword;
 
+    public UserCredentials() {
+    }
+
+    public UserCredentials(User user, String username, String password, String email, String verifyPassword) {
+        this.user = user;
+        this.username = username;
+        this.password = password;
+        this.email = email;
+        this.verifyPassword = verifyPassword;
+    }
+
+    public UserCredentials(User user, String username, String password, String email) {
+        this.user = user;
+        this.username = username;
+        this.password = password;
+        this.email = email;
+    }
 
     public String getUsername() {
         return username;

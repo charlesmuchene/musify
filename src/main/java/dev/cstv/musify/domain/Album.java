@@ -2,6 +2,7 @@ package dev.cstv.musify.domain;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
@@ -10,21 +11,33 @@ import java.util.List;
 public class Album {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
 
     @Column(name = "title", nullable = false)
     private String title;
 
-    @Column(name = "artist", nullable = false)
-    private Artist artist;
-
     @Column(name = "releaseDate")
     @Temporal(TemporalType.DATE)
     private Date releaseDate;
 
-    @Transient
-    private List<Song> songs = new ArrayList<Song>();
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    private Collection<Song> songs = new ArrayList<Song>();
+
+    public Album() {
+    }
+
+    public Album(String title, Date releaseDate, Collection<Song> songs) {
+        this.title = title;
+        this.releaseDate = releaseDate;
+        this.songs = songs;
+    }
+
+    public Album(String title, Date releaseDate) {
+        this.title = title;
+        this.releaseDate = releaseDate;
+    }
 
     public String getTitle() {
         return title;
@@ -32,14 +45,6 @@ public class Album {
 
     public void setTitle(String title) {
         this.title = title;
-    }
-
-    public Artist getArtist() {
-        return artist;
-    }
-
-    public void setArtist(Artist artist) {
-        this.artist = artist;
     }
 
     public Date getReleaseDate() {
@@ -50,7 +55,7 @@ public class Album {
         this.releaseDate = releaseDate;
     }
 
-    public List<Song> getSongs() {
+    public Collection<Song> getSongs() {
         return songs;
     }
 

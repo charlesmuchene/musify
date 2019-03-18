@@ -13,7 +13,4 @@ public interface AlbumService {
 
     public Album update(Album album);
 
-    public List<Album> findAllJoinFetch();
-
-    public List<Album> findAllSubSelect();
 }

@@ -13,7 +13,4 @@ public interface UserService {
 
     public User update(User user);
 
-    public List<User> findAllJoinFetch();
-
-    public List<User> findAllSubSelect();
 }

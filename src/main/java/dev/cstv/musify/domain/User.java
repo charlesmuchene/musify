@@ -9,6 +9,7 @@ import javax.persistence.*;
 public class User {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
 
@@ -23,6 +24,16 @@ public class User {
 
     @Transient
     private List<Playlist> playlists = new ArrayList<Playlist>();
+
+    public User() {
+    }
+
+    public User(String firstName, String lastName, UserCredentials userCredentials) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.userCredentials = userCredentials;
+    }
+
 
     public String getFirstName() {
         return firstName;

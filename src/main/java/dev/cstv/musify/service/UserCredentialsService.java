@@ -13,7 +13,4 @@ public interface UserCredentialsService {
 
     public UserCredentials update(UserCredentials userCredentials);
 
-    public List<UserCredentials> findAllJoinFetch();
-
-    public List<UserCredentials> findAllSubSelect();
 }

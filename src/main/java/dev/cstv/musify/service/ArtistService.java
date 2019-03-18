@@ -7,14 +7,13 @@ import java.util.List;
 
 public interface ArtistService {
 
-    public void save(Artist user);
+    public void save(Artist artist);
 
     public List<Artist> findAll();
 
-    public Artist update(Artist user);
+    public Artist update(Artist artist);
 
-    public List<Artist> findAllJoinFetch();
+    public Artist findOne(long id);
 
-    public List<Artist> findAllSubSelect();
 
 }

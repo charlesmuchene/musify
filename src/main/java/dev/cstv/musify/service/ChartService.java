@@ -13,7 +13,4 @@ public interface ChartService {
 
     public Chart update(Chart chart);
 
-    public List<Chart> findAllJoinFetch();
-
-    public List<Chart> findAllSubSelect();
 }

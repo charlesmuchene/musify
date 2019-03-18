@@ -35,14 +35,4 @@ public class AlbumServiceImpl implements AlbumService {
         return albumDao.update(album);
     }
 
-    @Override
-    public List<Album> findAllJoinFetch() {
-
-        return null;
-    }
-
-    @Override
-    public List<Album> findAllSubSelect() {
-        return null;
-    }
 }

@@ -13,7 +13,4 @@ public interface GenreService {
 
     public Genre update(Genre genre);
 
-    public List<Genre> findAllJoinFetch();
-
-    public List<Genre> findAllSubSelect();
 }

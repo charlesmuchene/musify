@@ -8,24 +8,19 @@ import java.util.Date;
 public class Song {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
 
     @Column(name = "title", length = 20, nullable = false)
     private String title;
 
-    @JoinColumn(name = "id")
+    @JoinColumn(name = "genre")
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Genre genre;
 
-    @JoinColumn(name = "id")
-    @Column(name = "artist", nullable = false)
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private Artist artist;
-
-    @JoinColumn(name = "id")
-    @Column(name = "album")
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @Transient
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Album album;
 
     @Column(name = "duration")
@@ -49,14 +44,6 @@ public class Song {
 
     public void setGenre(Genre genre) {
         this.genre = genre;
-    }
-
-    public Artist getArtist() {
-        return artist;
-    }
-
-    public void setArtist(Artist artist) {
-        this.artist = artist;
     }
 
     public Album getAlbum() {
