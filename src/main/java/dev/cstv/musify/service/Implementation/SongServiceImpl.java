@@ -1,5 +1,6 @@
 package dev.cstv.musify.service.Implementation;
 
+import dev.cstv.musify.aop.ServiceValidation;
 import dev.cstv.musify.dao.SongDao;
 import dev.cstv.musify.domain.Song;
 import dev.cstv.musify.service.SongService;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.util.List;
 
+
 @Service
 @Transactional
 public class SongServiceImpl implements SongService {
@@ -16,6 +18,7 @@ public class SongServiceImpl implements SongService {
     @Autowired
     private SongDao songDao;
 
+    @ServiceValidation
     @Override
     public void save(Song song) {
 
@@ -27,6 +30,7 @@ public class SongServiceImpl implements SongService {
         return songDao.findAll();
     }
 
+    @ServiceValidation
     @Override
     public Song update(Song song) {
 

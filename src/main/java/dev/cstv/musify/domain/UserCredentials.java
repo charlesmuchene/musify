@@ -1,6 +1,13 @@
 package dev.cstv.musify.domain;
 
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.Length;
+
 import javax.persistence.*;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "UserCredentials")
@@ -14,12 +21,19 @@ public class UserCredentials {
     @OneToOne(fetch = FetchType.EAGER)
     private User user;
 
+    @Pattern(regexp = "^[A-Z|a-z]+", message = "{Pattern}")
+    @NotNull(message = "{NotNull}")
+    @Length(min = 3,message = "{Length}")
     @Column(name = "username", nullable = false)
     private String username;
 
+    @NotNull(message = "{NotNull}")
+    @Length(min = 3,message = "{Length}")
     @Column(name = "password", nullable = false)
     private String password;
 
+    @Email(message = "{Email}")
+    @NotNull(message = "{NotNull}")
     @Column(name = "email", nullable = false)
     private String email;
 
@@ -44,11 +58,11 @@ public class UserCredentials {
         this.email = email;
     }
 
-    public UserCredentials(String username,String password,String email){
+    public UserCredentials(String username, String password, String email) {
 
-        this.username=username;
-        this.password=password;
-        this.email=email;
+        this.username = username;
+        this.password = password;
+        this.email = email;
     }
 
     public String getUsername() {

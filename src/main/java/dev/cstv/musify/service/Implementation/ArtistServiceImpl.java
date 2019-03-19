@@ -1,5 +1,6 @@
 package dev.cstv.musify.service.Implementation;
 
+import dev.cstv.musify.aop.ServiceValidation;
 import dev.cstv.musify.dao.ArtistDao;
 import dev.cstv.musify.domain.Artist;
 import dev.cstv.musify.service.ArtistService;
@@ -16,6 +17,7 @@ public class ArtistServiceImpl implements ArtistService {
     @Autowired
     private ArtistDao artistDao;
 
+    @ServiceValidation
     @Override
     public void save(Artist artist) {
 
@@ -28,6 +30,7 @@ public class ArtistServiceImpl implements ArtistService {
         return artistDao.findAll();
     }
 
+    @ServiceValidation
     @Override
     public Artist update(Artist artist) {
 

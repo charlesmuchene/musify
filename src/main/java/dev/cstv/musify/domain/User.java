@@ -6,6 +6,11 @@ import org.hibernate.annotations.FetchMode;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.*;
+import javax.validation.Valid;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "User")
@@ -16,17 +21,23 @@ public class User {
     @Column(name = "id")
     private Long id;
 
+    @NotNull(message = "{NotNull}")
+    @Pattern(regexp = "^[A-Za-z]+", message = "{Pattern}")
     @Column(name = "firstName", nullable = false)
     private String firstName;
 
+    @NotNull(message = "{NotNull}")
+    @Pattern(regexp = "^[A-Za-z]+", message = "{Pattern}")
     @Column(name = "lastName", nullable = false)
     private String lastName;
 
-    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL,mappedBy = "user")
-    @JoinColumn(name = "user",referencedColumnName = "id")
+    @NotNull
+    @Valid
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "user")
+    @JoinColumn(name = "user", referencedColumnName = "id")
     private UserCredentials userCredentials;
 
-    @OneToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "user")
     @Fetch(FetchMode.SUBSELECT)
     private List<Playlist> playlists = new ArrayList<Playlist>();

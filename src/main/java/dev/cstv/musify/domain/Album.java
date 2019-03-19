@@ -1,6 +1,7 @@
 package dev.cstv.musify.domain;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
@@ -15,17 +16,21 @@ public class Album {
     @Column(name = "id")
     private Long id;
 
+    @NotNull(message = "{NotNull}")
     @Column(name = "title", nullable = false)
     private String title;
 
+    @NotNull(message = "{NotNull}")
     @Column(name = "releaseDate")
     @Temporal(TemporalType.DATE)
     private Date releaseDate;
 
+    @NotNull(message = "{NotNull}")
     @OneToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
     @JoinColumn(name = "album")
     private List<Song> songs = new ArrayList<Song>();
 
+    @NotNull(message = "{NotNull}")
     @Transient
     @ManyToOne(fetch = FetchType.LAZY)
     private Artist artist;

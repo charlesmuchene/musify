@@ -2,8 +2,13 @@ package dev.cstv.musify.domain;
 
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
+import org.hibernate.validator.constraints.Range;
+import org.hibernate.validator.constraints.URL;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 @Entity
@@ -16,13 +21,15 @@ public class Song {
     private Long id;
 
     @Column(name = "title", length = 50, nullable = false)
+    @NotNull(message = "{NotNull}")
     private String title;
-
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "genre")
     private Genre genre;
 
+    @NotNull
+    @URL(message = "{URL}")
     @Column(name = "url")
     private String url;
 
@@ -30,13 +37,18 @@ public class Song {
     @JoinColumn(name = "album")
     private Album album;
 
+    @NotNull
+    @Range(min = 1, max = 10, message = "{Duration}")
     @Column(name = "duration")
     private Integer duration;
 
+    @NotNull
     @Temporal(TemporalType.DATE)
     @Column(name = "releaseDate")
     private Date releaseDate;
 
+    @NotNull(message = "{NotNull}")
+    @Valid
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "artist")
     private Artist artist;

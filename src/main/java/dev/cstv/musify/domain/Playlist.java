@@ -1,6 +1,12 @@
 package dev.cstv.musify.domain;
 
+import org.hibernate.validator.constraints.Length;
+
 import javax.persistence.*;
+import javax.validation.Valid;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,14 +19,18 @@ public class Playlist {
     @Column(name = "id")
     private Long id;
 
+    @NotNull(message = "{NotNull}")
+    @Length(min = 3,message = "{Length}")
     @Column(name = "name", nullable = false)
     private String name;
 
+    @NotNull(message = "{NotNull}")
+    @Valid
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "user")
     private User user;
 
-    @ManyToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(name = "playlist_songs", joinColumns = @JoinColumn(name = "playlist_id"), inverseJoinColumns = @JoinColumn(name = "song_id", referencedColumnName = "id"))
     private List<Song> songs = new ArrayList<Song>();
 
