@@ -31,4 +31,9 @@ public class UserCredentialServiceImpl implements UserCredentialsService {
     public UserCredentials update(UserCredentials userCredentials) {
         return userCredentialsDao.update(userCredentials);
     }
+
+    @Override
+    public UserCredentials findOne(long id) {
+        return userCredentialsDao.findOne(id);
+    }
 }

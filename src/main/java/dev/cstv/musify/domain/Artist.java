@@ -2,9 +2,13 @@ package dev.cstv.musify.domain;
 
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
+import org.hibernate.sql.Update;
 
 import javax.persistence.*;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+
+import static javax.persistence.FetchType.EAGER;
 
 @Entity
 @Table(name = "Artist")
@@ -12,21 +16,20 @@ public class Artist {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+    @Column(name = "artist_id")
     private Long id;
 
     @Column(name = "name", nullable = false)
     private String name;
 
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(name = "artist")
+    @OneToMany(cascade = CascadeType.ALL,fetch = EAGER,mappedBy = "artist")
     @Fetch(FetchMode.SUBSELECT)
-    private Collection<Song> songs = new ArrayList<Song>();
+    private List<Song> songs = new ArrayList<Song>();
 
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(name = "artist")
+    @OneToMany(cascade = CascadeType.ALL,fetch = EAGER)
     @Fetch(FetchMode.SUBSELECT)
-    private Collection<Album> albums = new ArrayList<Album>();
+    @JoinColumn(name = "artist")
+    private List<Album> albums = new ArrayList<Album>();
 
     public Artist() {
     }
@@ -35,7 +38,7 @@ public class Artist {
         this.name = name;
     }
 
-    public Collection<Album> getAlbums() {
+    public List<Album> getAlbums() {
         return albums;
     }
 
@@ -51,7 +54,7 @@ public class Artist {
         this.name = name;
     }
 
-    public Collection<Song> getSongs() {
+    public List<Song> getSongs() {
         return songs;
     }
 

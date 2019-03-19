@@ -13,4 +13,7 @@ public interface UserService {
 
     public User update(User user);
 
+    public User findOne(long id);
+
+    public User findAllBySubSelect();
 }
