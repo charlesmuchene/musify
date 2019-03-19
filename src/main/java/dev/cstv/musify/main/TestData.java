@@ -29,6 +29,7 @@ public class TestData {
         Artist sautiSol = new Artist("Sauti Sol");
         Artist lievTuk = new Artist("Liev Tuk");
         Artist thùyChi = new Artist("Thùy Chi");
+        Artist virtualArtist=new Artist("Virtual Artist");
 
         Genre popGenre = new Genre("Pop");
         Genre soulGenre = new Genre("Soul");
@@ -87,7 +88,6 @@ public class TestData {
         sautiSong.setReleaseDate(new Date(2013, 12, 2));
         sautiSong.setArtist(sautiSol);
 
-
         //Songs in Album
         Song secondSong = new Song();
         secondSong.setTitle("Song in Album");
@@ -108,6 +108,12 @@ public class TestData {
         sautiSol.addSong(sautiSong);
         thùyChi.addSong(vSong);
         lievTuk.addSong(cSong);
+
+        Song virtualSong=new Song();
+        virtualSong.setTitle("Virtual Song for test");
+        virtualSong.setArtist(virtualArtist);
+
+        songService.save(virtualSong);
 
         //Add Album to Artist Object
         Album album = new Album("My First Album", new Date(3, 12, 2018));
@@ -185,6 +191,8 @@ public class TestData {
         charlo.getPlaylists().add(charloPlaylist);
 
         userService.update(charlo);
+
+        User derrivedUser=userService.findOne(1);
 
     }
 

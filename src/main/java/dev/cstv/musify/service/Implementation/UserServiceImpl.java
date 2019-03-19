@@ -37,4 +37,10 @@ public class UserServiceImpl implements UserService {
 
         return userDao.findOne(id);
     }
+
+    @Override
+    public User findAllBySubSelect() {
+
+        return null;
+    }
 }

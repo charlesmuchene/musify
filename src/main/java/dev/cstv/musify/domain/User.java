@@ -1,5 +1,8 @@
 package dev.cstv.musify.domain;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.*;
@@ -25,6 +28,7 @@ public class User {
 
     @OneToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
     @JoinColumn(name = "user")
+    @Fetch(FetchMode.SUBSELECT)
     private List<Playlist> playlists = new ArrayList<Playlist>();
 
     public User() {

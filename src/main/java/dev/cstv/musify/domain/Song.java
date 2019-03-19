@@ -15,7 +15,7 @@ public class Song {
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "title", length = 20, nullable = false)
+    @Column(name = "title", length = 50, nullable = false)
     private String title;
 
 

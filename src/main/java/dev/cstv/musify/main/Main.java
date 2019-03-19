@@ -2,8 +2,6 @@ package dev.cstv.musify.main;
 
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import java.awt.*;
-
 public class Main {
 
     static ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("classpath:/context/applicationContext.xml");
@@ -13,6 +11,5 @@ public class Main {
         System.out.println("Play and Work");
 
         testData.load();
-
     }
 }
