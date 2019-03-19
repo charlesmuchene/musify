@@ -6,8 +6,6 @@ import dev.cstv.musify.service.PlaylistService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 
-import java.util.Map;
-
 public class PlaylistPolicy implements Policy {
     @Autowired
 	PlaylistService playlistService;
@@ -17,12 +15,11 @@ public class PlaylistPolicy implements Policy {
     public PlaylistPolicy() {}
 
     // Evaluate Rules
-	public Boolean checkRules(Authentication authentication, String action, Object asset, Map environment) {
+	public Boolean checkRules(Authentication authentication, String action, Object asset) {
 		// Call default interface method
 		if (!hasActionAuthority(action)) return false;
 
 		this.playlist = (Playlist)asset;
-//		this.timeZone = (String) environment.get("timeZone");
 
 		Boolean result = false;
 		Boolean owner = false;
@@ -43,15 +40,7 @@ public class PlaylistPolicy implements Policy {
 	     	    	System.out.println("VIOLATED Update Owner RULE!!");
 	     	    	result =  false;
 	    		}
-
-	    		// Only allow updates if in Central Time Zone
-//	    		else if (!TimeZone.getDefault().getDisplayName().equals(timeZone)) {
-//
-//	    			System.out.println("VIOLATED Playlist Update Time Zone RULE!!");
-//	     	    	result =  false;
-//	     	    }
 	    		else {
-
 	    			System.out.println("Rules EVALUATION related to Playlist update request SUCCESSFULL");
 	    			result =  true;
 	    		}

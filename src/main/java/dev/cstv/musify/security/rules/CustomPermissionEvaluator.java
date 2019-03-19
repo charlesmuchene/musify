@@ -8,15 +8,12 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
 
 import java.io.Serializable;
-import java.util.HashMap;
-import java.util.Map;
 
 /*
  * 		evaluate hasPermission(#targetDomainObject, permission)
  */
 @Component
 public class CustomPermissionEvaluator implements PermissionEvaluator {
-    // Used in KLUDGE to get TIME ZONE from Console
     @Autowired
     AuthenticateUser authenticateUser;
 
@@ -24,14 +21,10 @@ public class CustomPermissionEvaluator implements PermissionEvaluator {
     @Override
     public boolean hasPermission(Authentication authentication, Object targetDomainObject, Object permission) {
 
-        // Time; device,geolocation  etc..."environment" rule attributes
-        Map<String, Object> environment = new HashMap<>();
-//        environment.put("timeZone" , authenticateUser.getTimeZone());
-
         // Look up asset specific policy/rules from "configured list"
         Policy policy = (Policy) Main.policyList.get(targetDomainObject.getClass().getSimpleName());
-        // Policy is ABAC type context [ User,      action,            asset,            environment]
-        return policy.checkRules(authentication, (String)permission, targetDomainObject, environment);
+        // Policy is ABAC type context [ User,      action,            asset]
+        return policy.checkRules(authentication, (String)permission, targetDomainObject);
     }
 
     // hasPermission with target object TYPE instead of Object

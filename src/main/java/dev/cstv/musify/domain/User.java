@@ -24,8 +24,6 @@ public class User {
 
     @OneToOne(fetch=FetchType.EAGER,  cascade = CascadeType.ALL)
     @JoinColumn(name="userId")
-    // @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL,mappedBy = "user")
-    // @JoinColumn(name = "user",referencedColumnName = "id")
     private UserCredentials userCredentials;
 
     @OneToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
