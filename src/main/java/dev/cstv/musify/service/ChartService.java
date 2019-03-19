@@ -13,4 +13,6 @@ public interface ChartService {
 
     public Chart update(Chart chart);
 
+    public Chart findOne(long id);
+
 }

@@ -15,4 +15,6 @@ public interface UserCredentialsService {
 
     public UserCredentials findByUserName(String userName);
 
+    public UserCredentials findOne(long id);
+
 }

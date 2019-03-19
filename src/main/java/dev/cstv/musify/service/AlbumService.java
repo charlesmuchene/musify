@@ -13,4 +13,6 @@ public interface AlbumService {
 
     public Album update(Album album);
 
+    public Album findOne(long id);
+
 }

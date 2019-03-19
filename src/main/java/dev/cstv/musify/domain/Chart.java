@@ -16,6 +16,10 @@ public class Chart {
     @Column(name = "name", nullable = false)
     private String name;
 
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "chart_songs",joinColumns = @JoinColumn(name = "chart_id"),inverseJoinColumns = @JoinColumn(name = "song_id"))
+    private List<Song> songs = new ArrayList<Song>();
+
     public Chart() {
     }
 
@@ -27,9 +31,6 @@ public class Chart {
     public Chart(String name) {
         this.name = name;
     }
-
-    @Transient
-    private List<Song> songs = new ArrayList<Song>();
 
     public String getName() {
         return name;

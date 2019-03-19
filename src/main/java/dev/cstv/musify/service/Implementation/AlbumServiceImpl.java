@@ -35,4 +35,9 @@ public class AlbumServiceImpl implements AlbumService {
         return albumDao.update(album);
     }
 
+    @Override
+    public Album findOne(long id) {
+        return albumDao.findOne(id);
+    }
+
 }

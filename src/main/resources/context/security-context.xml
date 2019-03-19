@@ -36,7 +36,7 @@
    <property name="usersByUsernameQuery" value="select username,password,enabled from credentials where username=?" />
 	<property name="groupAuthoritiesByUsernameQuery" value="select g.id, g.name, a.authority
                                from GroupToo g, GroupToo_credentials gc, GroupToo_authority ga, authority a
-                                where gc.userCredentials_username = ? and g.id = ga.Group_id and g.id = gc.Group_id
+                                where gc.userCredentials_username = ? and g.id = ga.GroupToo_id and g.id = gc.GroupToo_id
                                 and ga.authority_id = a.id" />
 </bean> 
 </beans>

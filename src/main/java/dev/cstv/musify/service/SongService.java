@@ -13,6 +13,7 @@ public interface SongService {
 
     public Song update(Song song);
 
+    public Song findOne(long id);
 
 
 }

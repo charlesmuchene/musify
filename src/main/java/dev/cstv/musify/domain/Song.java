@@ -1,5 +1,8 @@
 package dev.cstv.musify.domain;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -12,15 +15,19 @@ public class Song {
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "title", length = 20, nullable = false)
+    @Column(name = "title", length = 50, nullable = false)
     private String title;
 
+
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "genre")
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Genre genre;
 
-    @Transient
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @Column(name = "url")
+    private String url;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "album")
     private Album album;
 
     @Column(name = "duration")
@@ -29,6 +36,18 @@ public class Song {
     @Temporal(TemporalType.DATE)
     @Column(name = "releaseDate")
     private Date releaseDate;
+
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinColumn(name = "artist")
+    private Artist artist;
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
 
     public String getTitle() {
         return title;
@@ -68,5 +87,13 @@ public class Song {
 
     public void setReleaseDate(Date releaseDate) {
         this.releaseDate = releaseDate;
+    }
+
+    public Artist getArtist() {
+        return artist;
+    }
+
+    public void setArtist(Artist artist) {
+        this.artist = artist;
     }
 }

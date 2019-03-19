@@ -31,4 +31,9 @@ public class ChartServiceImpl implements ChartService {
     public Chart update(Chart chart) {
         return chartDao.update(chart);
     }
+
+    @Override
+    public Chart findOne(long id) {
+        return chartDao.findOne(id);
+    }
 }

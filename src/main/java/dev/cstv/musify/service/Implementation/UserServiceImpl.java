@@ -41,4 +41,16 @@ public class UserServiceImpl implements UserService {
     public User update(User user) {
         return userDao.update(user);
     }
+
+    @Override
+    public User findOne(long id) {
+
+        return userDao.findOne(id);
+    }
+
+    @Override
+    public User findAllBySubSelect() {
+
+        return null;
+    }
 }

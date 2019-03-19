@@ -3,10 +3,8 @@ package dev.cstv.musify.main;
 import dev.cstv.musify.domain.*;
 import dev.cstv.musify.security.AuthenticateUser;
 import dev.cstv.musify.security.rules.PlaylistPolicy;
-import dev.cstv.musify.service.GroupService;
 import dev.cstv.musify.service.PlaylistService;
 import dev.cstv.musify.service.UserCredentialsService;
-import dev.cstv.musify.service.UserService;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -24,11 +22,10 @@ public class Main {
         System.out.println("Play and Work");
 
         ApplicationContext ctx = new ClassPathXmlApplicationContext("context/applicationContext.xml");
+        TestData testData = ctx.getBean("testData",TestData.class);
 
         AuthenticationManager authenticationManager = (AuthenticationManager) ctx.getBean("authenticationManager");
 
-        UserService userService = (UserService) ctx.getBean("userServiceImpl");
-        GroupService groupService = (GroupService) ctx.getBean("groupServiceImpl");
         PlaylistService playlistService = (PlaylistService)ctx.getBean("playlistServiceImpl");
         UserCredentialsService userCredentialsService = (UserCredentialsService) ctx.getBean("userCredentialsServiceImpl");
         AuthenticateUser authenticateUser = (AuthenticateUser) ctx.getBean("authenticateUser");
@@ -36,36 +33,7 @@ public class Main {
         // "Configured list of policies/rules
         policyList.put("Playlist", new PlaylistPolicy());
 
-        Group groupUser = new Group();
-        groupUser.setName("User");
-
-        Authority authority = new Authority();
-        authority.setAuthority("create");
-        groupUser.getAuthority().add(authority);
-
-        authority = new Authority();
-        authority.setAuthority("update");
-        groupUser.getAuthority().add(authority);
-
-        authority = new Authority();
-        authority.setAuthority("delete");
-        groupUser.getAuthority().add(authority);
-
-        authority = new Authority();
-        authority.setAuthority("list");
-        groupUser.getAuthority().add(authority);
-
-        UserCredentials johnUserCredentials = new UserCredentials("john", "john", "john@musify.com");
-        User johnUser = new User("John", "Smith", johnUserCredentials);
-        userService.saveFull(johnUser);
-
-        UserCredentials paulUserCredentials = new UserCredentials("paul", "paul", "paul@musify.com");
-        User paulUser = new User("Paul", "Smith", paulUserCredentials);
-        userService.saveFull(paulUser);
-
-        groupUser.getUserCredentials().add(johnUserCredentials);
-        groupUser.getUserCredentials().add(paulUserCredentials);
-        groupService.save(groupUser);
+        testData.load();
 
         try {
             authenticateUser.authenticate(authenticationManager);
@@ -74,8 +42,8 @@ public class Main {
         }
 
         String userName =  SecurityContextHolder.getContext().getAuthentication().getName();
-        johnUserCredentials = userCredentialsService.findByUserName(userName);
-        johnUser = johnUserCredentials.getUser();
+        UserCredentials johnUserCredentials = userCredentialsService.findByUserName(userName);
+        User johnUser = johnUserCredentials.getUser();
 
         Playlist playlist = new Playlist("Have a Great Day!", johnUser);
         playlistService.save(playlist);
@@ -98,5 +66,6 @@ public class Main {
                 System.out.println("****** ACCESS DENIED ! You Need to be OWNER to Update  **********");
             }
         }
+
     }
 }

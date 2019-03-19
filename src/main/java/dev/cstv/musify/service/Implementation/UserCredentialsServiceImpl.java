@@ -41,4 +41,8 @@ public class UserCredentialsServiceImpl implements UserCredentialsService {
     public UserCredentials findByUserName(String userName) {
         return userCredentialsDao.findByUserName(userName);
     }
+
+    public UserCredentials findOne(long id) {
+        return userCredentialsDao.findOne(id);
+    }
 }

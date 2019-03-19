@@ -1,41 +1,40 @@
 package Service;
 
-import dev.cstv.musify.domain.Album;
 import dev.cstv.musify.domain.Artist;
+import dev.cstv.musify.domain.Genre;
 import dev.cstv.musify.domain.Song;
-import dev.cstv.musify.service.ArtistService;
-import org.junit.jupiter.api.Test;
+import dev.cstv.musify.service.SongService;
+import org.junit.FixMethodOrder;
+import org.junit.Test;
+import org.junit.runners.MethodSorters;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import java.util.ArrayList;
 import java.util.Date;
 
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class SongServiceTest {
 
     ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("classpath:/context/applicationContext.xml");
-    ArtistService artistService = (ArtistService) context.getBean("artistServiceImpl");
-
+    SongService songService=(SongService)context.getBean("songServiceImpl");
 
     @Test
     public void saveSong() {
 
-        Artist artist = artistService.findOne(1);
+        Artist artist=new Artist("Khaled");
 
-        Album album=new Album("Khalid Music",new Date(2017,2,12),new ArrayList<Song>());
+        Genre genre = new Genre("Pop");
 
         Song song = new Song();
         song.setTitle("Better");
+        song.setGenre(genre);
+        song.setDuration(3);
+        song.setReleaseDate(new Date(2013,12,2));
+        song.setArtist(artist);
 
-        Song song1 =new Song();
-        song1.setTitle("On My Mind");
-
-        artist.addSong(song);
-
-        artist.addSong(song1);
-
-        artist.addAlbum(new Album("Taki taki",new Date(2018,2,18),artist.getSongs()));
-
-        artistService.update(artist);
+        songService.save(song);
 
     }
+
+
+
 }

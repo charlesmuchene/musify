@@ -10,8 +10,7 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="EAProject" target="6" />
-      <module name="musify" target="8" />
+      <module name="musify" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>
