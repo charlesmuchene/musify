@@ -14,42 +14,37 @@ import static org.junit.Assert.assertEquals;
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class ArtistServiceTest {
 
-    ClassPathXmlApplicationContext context=new ClassPathXmlApplicationContext("classpath:/context/applicationContext.xml");
+    ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("classpath:/context/applicationContext.xml");
 
-    ArtistService artistService= (ArtistService) context.getBean("artistServiceImpl");
+    ArtistService artistService = (ArtistService) context.getBean("artistServiceImpl");
 
     @Test
-    public void saveArtist(){
+    public void saveArtist() {
 
-        Artist artist=new Artist("Khalid");
+        Artist artist = new Artist("Khalid");
 
         artistService.save(artist);
     }
 
     @Test
-    public void updateArtist(){
+    public void updateArtist() {
 
-        Artist artist=artistService.findOne(1);
+        Artist artist = artistService.findOne(1);
         artist.setName("Khaled");
 
-        assertEquals(Artist.class,artistService.update(artist).getClass());
+        assertEquals(Artist.class, artistService.update(artist).getClass());
     }
 
     @Test
-    public void getSingleArtist(){
-
-        assertEquals(Artist.class,artistService.findOne(1).getClass());
-
+    public void getSingleArtist() {
+        assertEquals(Artist.class, artistService.findOne(1).getClass());
     }
 
 
     @Test
-    public void getAllArtists(){
-
-        assertEquals(ArrayList.class,artistService.findAll().getClass());
-
+    public void getAllArtists() {
+        assertEquals(ArrayList.class, artistService.findAll().getClass());
     }
-
 
 
 }

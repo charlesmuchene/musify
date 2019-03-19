@@ -3,7 +3,6 @@ package dev.cstv.musify.main;
 import dev.cstv.musify.domain.*;
 import dev.cstv.musify.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -116,6 +115,7 @@ public class TestData {
 
         Album secondAlbum = new Album("My Second Album", new Date(19, 12, 8));
         secondAlbum.addSong(thirdSong);
+        secondAlbum.addSong(song);
 
         artist.addAlbum(album);
         artist.addAlbum(secondAlbum);
@@ -186,9 +186,6 @@ public class TestData {
 
         userService.update(charlo);
 
-        List<Song> songList = songService.findAll();
-
-        Chart currentChart = chartService.findOne(1);
     }
 
 
