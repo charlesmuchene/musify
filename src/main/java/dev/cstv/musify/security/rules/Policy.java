@@ -9,12 +9,12 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 
 /*
- * executes the rules in an ABAC type context [ User,action, asset,environment]
+ * executes the rules in an ABAC type context [ User, action, asset]
  */
 		
 public interface Policy {
 
- 	public Boolean checkRules(Authentication authentication, String action, Object asset, Map envronment);
+ 	public Boolean checkRules(Authentication authentication, String action, Object asset);
  	
  	// Check for permission 
  	public default Boolean hasActionAuthority(String action) {

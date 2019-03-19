@@ -19,7 +19,8 @@ public class Main {
     public static Map<String, Object> policyList = new HashMap<String, Object>();
 
     public static void main(String[] args) {
-        System.out.println("Play and Work");
+        System.out.println("Musify");
+        System.out.println("Bring Music to the World");
 
         ApplicationContext ctx = new ClassPathXmlApplicationContext("context/applicationContext.xml");
         TestData testData = ctx.getBean("testData",TestData.class);
@@ -35,6 +36,7 @@ public class Main {
 
         testData.load();
 
+        System.out.println("\n!!! Please login, Use `john` for username and password to create one playlist for this user !!!");
         try {
             authenticateUser.authenticate(authenticationManager);
         } catch (Exception e) {
@@ -47,9 +49,12 @@ public class Main {
 
         Playlist playlist = new Playlist("Have a Great Day!", johnUser);
         playlistService.save(playlist);
+        System.out.println("*** Create playlist for user: " + johnUser.getFirstName());
 
         authenticateUser.logout();
+        System.out.println("*** Logged out");
 
+        System.out.println("\n!!! Please login, Use `paul` for username and password, Try to update a playlist that belongs to another user !!!");
         while (true) {
             try {
                 authenticateUser.authenticate(authenticationManager);
@@ -64,6 +69,7 @@ public class Main {
 
             } catch ( AccessDeniedException e) {
                 System.out.println("****** ACCESS DENIED ! You Need to be OWNER to Update  **********");
+                System.out.println("\n!!! Please login again to update a playlist that belongs to john, Use `john` for username and password !!!");
             }
         }
 

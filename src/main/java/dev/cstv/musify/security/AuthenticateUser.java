@@ -4,13 +4,11 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
-import java.util.List;
 
 @Component
 public class AuthenticateUser {
@@ -27,10 +25,7 @@ public class AuthenticateUser {
                 Authentication request = new UsernamePasswordAuthenticationToken(name, password);
                 Authentication result = authenticationManager.authenticate(request);
                 SecurityContextHolder.getContext().setAuthentication(result);
-                System.out.println("Logged in: " + name);
-//                System.out.println("AUTHORITIES GRANTED:");
-//                List<GrantedAuthority> aList = (List<GrantedAuthority>) SecurityContextHolder.getContext().getAuthentication().getAuthorities();
-//                for (GrantedAuthority ga : aList) System.out.println( "AUTHORITY " + ga.getAuthority());
+                System.out.println("*** Logged in: " + name);
                 break;
             } catch(AuthenticationException e) {
                 System.out.println( );
@@ -40,7 +35,6 @@ public class AuthenticateUser {
     }
 
     public void logout() {
-        // Clears the context for the current user/thread
         SecurityContextHolder.clearContext();
     }
 }

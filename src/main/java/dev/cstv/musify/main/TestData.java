@@ -145,6 +145,29 @@ public class TestData {
         chartService.save(chart);
 
         /*
+        * Init group user and authorities
+        * */
+
+        Group groupUser = new Group();
+        groupUser.setName("User");
+
+        Authority authority = new Authority();
+        authority.setAuthority("create");
+        groupUser.getAuthority().add(authority);
+
+        authority = new Authority();
+        authority.setAuthority("update");
+        groupUser.getAuthority().add(authority);
+
+        authority = new Authority();
+        authority.setAuthority("delete");
+        groupUser.getAuthority().add(authority);
+
+        authority = new Authority();
+        authority.setAuthority("list");
+        groupUser.getAuthority().add(authority);
+
+        /*
         /Dummy data for Users
         Create a new User
         */
@@ -168,6 +191,21 @@ public class TestData {
         UserCredentials tuyCredentials = new UserCredentials(fourthUser, "tuy", "tuy", "tuy@mail.com");
         fourthUser.setUserCredentials(tuyCredentials);
         userService.saveFull(fourthUser);
+
+        UserCredentials johnUserCredentials = new UserCredentials("john", "john", "john@musify.com");
+        User johnUser = new User("John", "Smith", johnUserCredentials);
+        userService.saveFull(johnUser);
+
+        UserCredentials paulUserCredentials = new UserCredentials("paul", "paul", "paul@musify.com");
+        User paulUser = new User("Paul", "Smith", paulUserCredentials);
+        userService.saveFull(paulUser);
+
+        groupUser.getUserCredentials().add(stevenCredentials);
+        groupUser.getUserCredentials().add(vorleakCredentials);
+        groupUser.getUserCredentials().add(charlesCredentials);
+        groupUser.getUserCredentials().add(tuyCredentials);
+        groupUser.getUserCredentials().add(johnUserCredentials);
+        groupUser.getUserCredentials().add(paulUserCredentials);
 
         /*
         /
@@ -197,42 +235,12 @@ public class TestData {
 
         User derrivedUser=userService.findOne(1);
 
+        /*
+         * Create user group
+         * */
 
-
-        /* Create Group, Authorities, User */
-
-        Group groupUser = new Group();
-        groupUser.setName("User");
-
-        Authority authority = new Authority();
-        authority.setAuthority("create");
-        groupUser.getAuthority().add(authority);
-
-        authority = new Authority();
-        authority.setAuthority("update");
-        groupUser.getAuthority().add(authority);
-
-        authority = new Authority();
-        authority.setAuthority("delete");
-        groupUser.getAuthority().add(authority);
-
-        authority = new Authority();
-        authority.setAuthority("list");
-        groupUser.getAuthority().add(authority);
-
-        UserCredentials johnUserCredentials = new UserCredentials("john", "john", "john@musify.com");
-        User johnUser = new User("John", "Smith", johnUserCredentials);
-        userService.saveFull(johnUser);
-
-        UserCredentials paulUserCredentials = new UserCredentials("paul", "paul", "paul@musify.com");
-        User paulUser = new User("Paul", "Smith", paulUserCredentials);
-        userService.saveFull(paulUser);
-
-        groupUser.getUserCredentials().add(johnUserCredentials);
-        groupUser.getUserCredentials().add(paulUserCredentials);
         groupService.save(groupUser);
 
+        System.out.println("*** Loaded Dummy Data");
     }
-
-
 }
