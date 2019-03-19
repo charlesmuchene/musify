@@ -19,13 +19,21 @@ public class User {
     @Column(name = "lastName", nullable = false)
     private String lastName;
 
-    @Transient
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL,mappedBy = "user")
+    @JoinColumn(name = "user",referencedColumnName = "id")
     private UserCredentials userCredentials;
 
-    @Transient
+    @OneToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
+    @JoinColumn(name = "user")
     private List<Playlist> playlists = new ArrayList<Playlist>();
 
     public User() {
+    }
+
+    public User(String firstName, String lastName) {
+
+        this.firstName = firstName;
+        this.lastName = lastName;
     }
 
     public User(String firstName, String lastName, UserCredentials userCredentials) {

@@ -15,8 +15,8 @@ public class Genre {
     @Column(name = "name", nullable = false)
     private String name;
 
-    @Transient
-    @OneToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.EAGER)
+    @JoinColumn(name = "genre")
     private List<Song> songs;
 
     public Genre() {

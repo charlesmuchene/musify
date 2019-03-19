@@ -13,4 +13,6 @@ public interface UserCredentialsService {
 
     public UserCredentials update(UserCredentials userCredentials);
 
+    public UserCredentials findOne(long id);
+
 }

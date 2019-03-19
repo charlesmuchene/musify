@@ -2,20 +2,29 @@ package Service;
 
 import dev.cstv.musify.domain.Artist;
 import dev.cstv.musify.service.ArtistService;
-import dev.cstv.musify.service.Implementation.ArtistServiceImpl;
+import org.junit.FixMethodOrder;
 import org.junit.jupiter.api.Test;
+import org.junit.runners.MethodSorters;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import java.util.ArrayList;
 
 import static org.junit.Assert.assertEquals;
 
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class ArtistServiceTest {
-
 
     ClassPathXmlApplicationContext context=new ClassPathXmlApplicationContext("classpath:/context/applicationContext.xml");
 
     ArtistService artistService= (ArtistService) context.getBean("artistServiceImpl");
+
+    @Test
+    public void saveArtist(){
+
+        Artist artist=new Artist("Khalid");
+
+        artistService.save(artist);
+    }
 
     @Test
     public void updateArtist(){
@@ -41,12 +50,6 @@ public class ArtistServiceTest {
 
     }
 
-    @Test
-    public void saveArtist(){
 
-        Artist artist=new Artist("Khalid");
-
-        artistService.save(artist);
-    }
 
 }

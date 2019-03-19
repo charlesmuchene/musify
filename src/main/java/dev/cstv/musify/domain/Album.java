@@ -22,8 +22,21 @@ public class Album {
     @Temporal(TemporalType.DATE)
     private Date releaseDate;
 
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
+    @JoinColumn(name = "album")
     private Collection<Song> songs = new ArrayList<Song>();
+
+    @Transient
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Artist artist;
+
+    public Artist getArtist() {
+        return artist;
+    }
+
+    public void setArtist(Artist artist) {
+        this.artist = artist;
+    }
 
     public Album() {
     }

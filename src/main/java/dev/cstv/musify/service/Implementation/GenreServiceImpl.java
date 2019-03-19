@@ -31,4 +31,9 @@ public class GenreServiceImpl implements GenreService {
     public Genre update(Genre genre) {
         return genreDao.update(genre);
     }
+
+    @Override
+    public Genre findOne(long id) {
+        return genreDao.findOne(id);
+    }
 }

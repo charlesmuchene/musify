@@ -15,4 +15,10 @@ public class SongDaoImpl extends GenericDaoImpl<Song> implements SongDao {
         super.setDaoType(Song.class );
     }
 
+
+    @Override
+    public List<Song> findAllBySubSelect() {
+
+        return this.entityManager.createQuery("select s from Song s join fetch Genre g on g.id=s.genre join fetch Artist a on a.id=s.artist",Song.class).getResultList();
+    }
 }

@@ -32,4 +32,9 @@ public class SongServiceImpl implements SongService {
 
         return songDao.update(song);
     }
+
+    @Override
+    public Song findOne(long id) {
+        return songDao.findOne(id);
+    }
 }

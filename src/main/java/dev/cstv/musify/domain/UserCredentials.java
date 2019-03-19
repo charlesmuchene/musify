@@ -11,8 +11,7 @@ public class UserCredentials {
     @Column(name = "id")
     private Long id;
 
-    @OneToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
-    @JoinColumn(name ="id")
+    @OneToOne(fetch = FetchType.EAGER)
     private User user;
 
     @Column(name = "username", nullable = false)
@@ -43,6 +42,13 @@ public class UserCredentials {
         this.username = username;
         this.password = password;
         this.email = email;
+    }
+
+    public UserCredentials(String username,String password,String email){
+
+        this.username=username;
+        this.password=password;
+        this.email=email;
     }
 
     public String getUsername() {

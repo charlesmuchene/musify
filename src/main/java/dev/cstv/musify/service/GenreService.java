@@ -13,4 +13,5 @@ public interface GenreService {
 
     public Genre update(Genre genre);
 
+    public Genre findOne(long id);
 }

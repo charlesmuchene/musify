@@ -20,10 +20,15 @@ public class Playlist {
     @JoinColumn(name = "user")
     private User user;
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
+    @JoinTable(name = "playlist_songs", joinColumns = @JoinColumn(name = "playlist_id"), inverseJoinColumns = @JoinColumn(name = "song_id", referencedColumnName = "id"))
     private List<Song> songs = new ArrayList<Song>();
 
     public Playlist() {
+    }
+
+    public Playlist(String name) {
+        this.name = name;
     }
 
     public Playlist(String name, User user, List<Song> songs) {
