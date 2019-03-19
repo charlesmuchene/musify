@@ -13,6 +13,8 @@ public interface UserCredentialsService {
 
     public UserCredentials update(UserCredentials userCredentials);
 
+    public UserCredentials findByUserName(String userName);
+
     public UserCredentials findOne(long id);
 
 }

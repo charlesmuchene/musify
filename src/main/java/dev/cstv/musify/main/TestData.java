@@ -23,6 +23,9 @@ public class TestData {
     @Autowired
     ChartService chartService;
 
+    @Autowired
+    GroupService groupService;
+
     public void load() {
 
         Artist artist = new Artist("Khaled");
@@ -149,22 +152,22 @@ public class TestData {
         User user = new User("Steven", "Katabalwa");
         UserCredentials stevenCredentials = new UserCredentials(user, "stev", "stev", "stev@mail.com");
         user.setUserCredentials(stevenCredentials);
-        userService.save(user);
+        userService.saveFull(user);
 
         User secondUser = new User("Vorleak", "Chy");
         UserCredentials vorleakCredentials = new UserCredentials(secondUser, "vorleak", "vorleak", "vorleak@mail.com");
         secondUser.setUserCredentials(vorleakCredentials);
-        userService.save(secondUser);
+        userService.saveFull(secondUser);
 
         User charlo = new User("Charles", "Muchene");
         UserCredentials charlesCredentials = new UserCredentials(charlo, "charlo", "charlo", "charlo@mail.com");
         charlo.setUserCredentials(charlesCredentials);
-        userService.save(charlo);
+        userService.saveFull(charlo);
 
         User fourthUser = new User("Tuy", "Vo");
         UserCredentials tuyCredentials = new UserCredentials(fourthUser, "tuy", "tuy", "tuy@mail.com");
         fourthUser.setUserCredentials(tuyCredentials);
-        userService.save(fourthUser);
+        userService.saveFull(fourthUser);
 
         /*
         /
@@ -193,6 +196,41 @@ public class TestData {
         userService.update(charlo);
 
         User derrivedUser=userService.findOne(1);
+
+
+
+        /* Create Group, Authorities, User */
+
+        Group groupUser = new Group();
+        groupUser.setName("User");
+
+        Authority authority = new Authority();
+        authority.setAuthority("create");
+        groupUser.getAuthority().add(authority);
+
+        authority = new Authority();
+        authority.setAuthority("update");
+        groupUser.getAuthority().add(authority);
+
+        authority = new Authority();
+        authority.setAuthority("delete");
+        groupUser.getAuthority().add(authority);
+
+        authority = new Authority();
+        authority.setAuthority("list");
+        groupUser.getAuthority().add(authority);
+
+        UserCredentials johnUserCredentials = new UserCredentials("john", "john", "john@musify.com");
+        User johnUser = new User("John", "Smith", johnUserCredentials);
+        userService.saveFull(johnUser);
+
+        UserCredentials paulUserCredentials = new UserCredentials("paul", "paul", "paul@musify.com");
+        User paulUser = new User("Paul", "Smith", paulUserCredentials);
+        userService.saveFull(paulUser);
+
+        groupUser.getUserCredentials().add(johnUserCredentials);
+        groupUser.getUserCredentials().add(paulUserCredentials);
+        groupService.save(groupUser);
 
     }
 

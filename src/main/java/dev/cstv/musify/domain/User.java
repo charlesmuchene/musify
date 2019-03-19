@@ -22,8 +22,10 @@ public class User {
     @Column(name = "lastName", nullable = false)
     private String lastName;
 
-    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL,mappedBy = "user")
-    @JoinColumn(name = "user",referencedColumnName = "id")
+    @OneToOne(fetch=FetchType.EAGER,  cascade = CascadeType.ALL)
+    @JoinColumn(name="userId")
+    // @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL,mappedBy = "user")
+    // @JoinColumn(name = "user",referencedColumnName = "id")
     private UserCredentials userCredentials;
 
     @OneToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
@@ -46,6 +48,13 @@ public class User {
         this.userCredentials = userCredentials;
     }
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public String getFirstName() {
         return firstName;

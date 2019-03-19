@@ -5,7 +5,7 @@ import dev.cstv.musify.domain.Genre;
 import dev.cstv.musify.domain.Song;
 import dev.cstv.musify.service.SongService;
 import org.junit.FixMethodOrder;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 import org.junit.runners.MethodSorters;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 

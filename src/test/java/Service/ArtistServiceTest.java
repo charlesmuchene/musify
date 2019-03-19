@@ -3,7 +3,7 @@ package Service;
 import dev.cstv.musify.domain.Artist;
 import dev.cstv.musify.service.ArtistService;
 import org.junit.FixMethodOrder;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 import org.junit.runners.MethodSorters;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
