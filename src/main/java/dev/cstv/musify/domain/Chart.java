@@ -1,6 +1,11 @@
 package dev.cstv.musify.domain;
 
+import org.hibernate.validator.constraints.Length;
+
 import javax.persistence.*;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,6 +18,8 @@ public class Chart {
     @Column(name = "id")
     private Long id;
 
+    @NotNull(message = "{NotNull}")
+    @Length(min = 5,message = "{Length}")
     @Column(name = "name", nullable = false)
     private String name;
 

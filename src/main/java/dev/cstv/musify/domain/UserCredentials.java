@@ -1,18 +1,30 @@
 package dev.cstv.musify.domain;
 
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.Length;
+
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 
 @Entity
 @Table(name = "Credentials")
 public class UserCredentials {
 
     @Id
+    @Pattern(regexp = "^[A-Z|a-z]+", message = "{Pattern}")
+    @NotNull(message = "{NotNull}")
+    @Length(min = 3,message = "{Length}")
     @Column(name = "username", nullable = false, unique = true, length = 127)
     private String username;
 
+    @NotNull(message = "{NotNull}")
+    @Length(min = 3,message = "{Length}")
     @Column(name = "password", nullable = false)
     private String password;
 
+    @Email(message = "{Email}")
+    @NotNull(message = "{NotNull}")
     @Column(name = "email", nullable = false)
     private String email;
 

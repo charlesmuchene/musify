@@ -5,6 +5,7 @@ import org.hibernate.annotations.FetchMode;
 import org.hibernate.sql.Update;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,6 +20,7 @@ public class Artist {
     @Column(name = "artist_id")
     private Long id;
 
+    @NotNull(message = "{NotNull}")
     @Column(name = "name", nullable = false)
     private String name;
 

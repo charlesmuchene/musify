@@ -1,5 +1,6 @@
-package dev.cstv.musify.service.Implementation;
+package dev.cstv.musify.service.implementation;
 
+import dev.cstv.musify.aop.ServiceValidation;
 import dev.cstv.musify.dao.GenreDao;
 import dev.cstv.musify.domain.Genre;
 import dev.cstv.musify.service.GenreService;
@@ -16,6 +17,7 @@ public class GenreServiceImpl implements GenreService {
     @Autowired
     private GenreDao genreDao;
 
+    @ServiceValidation
     @Override
     public void save(Genre genre) {
 
@@ -27,6 +29,7 @@ public class GenreServiceImpl implements GenreService {
         return genreDao.findAll();
     }
 
+    @ServiceValidation
     @Override
     public Genre update(Genre genre) {
         return genreDao.update(genre);

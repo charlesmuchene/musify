@@ -1,5 +1,6 @@
-package dev.cstv.musify.service.Implementation;
+package dev.cstv.musify.service.implementation;
 
+import dev.cstv.musify.aop.ServiceValidation;
 import dev.cstv.musify.dao.ChartDao;
 import dev.cstv.musify.domain.Chart;
 import dev.cstv.musify.service.ChartService;
@@ -16,6 +17,7 @@ public class ChartServiceImpl implements ChartService {
     @Autowired
     private ChartDao chartDao;
 
+    @ServiceValidation
     @Override
     public void save(Chart chart) {
         chartDao.save(chart);
@@ -27,6 +29,7 @@ public class ChartServiceImpl implements ChartService {
         return chartDao.findAll();
     }
 
+    @ServiceValidation
     @Override
     public Chart update(Chart chart) {
         return chartDao.update(chart);

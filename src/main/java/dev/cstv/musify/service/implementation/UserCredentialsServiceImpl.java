@@ -1,5 +1,6 @@
-package dev.cstv.musify.service.Implementation;
+package dev.cstv.musify.service.implementation;
 
+import dev.cstv.musify.aop.ServiceValidation;
 import dev.cstv.musify.dao.UserCredentialsDao;
 import dev.cstv.musify.domain.UserCredentials;
 import dev.cstv.musify.service.UserCredentialsService;
@@ -18,6 +19,7 @@ public class UserCredentialsServiceImpl implements UserCredentialsService {
     @Autowired
     private UserCredentialsDao userCredentialsDao;
 
+    @ServiceValidation
     @Override
     public void save(UserCredentials userCredentials) {
         PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
@@ -32,6 +34,7 @@ public class UserCredentialsServiceImpl implements UserCredentialsService {
         return userCredentialsDao.findAll();
     }
 
+    @ServiceValidation
     @Override
     public UserCredentials update(UserCredentials userCredentials) {
         return userCredentialsDao.update(userCredentials);

@@ -67,6 +67,7 @@ public class TestData {
         song.setTitle("Better");
         song.setGenre(genres.get(0));
         song.setDuration(3);
+        song.setUrl("http://localhost:8080/");
         song.setReleaseDate(new Date(2013, 12, 2));
         song.setArtist(artist);
 
@@ -74,6 +75,7 @@ public class TestData {
         cSong.setTitle("Rom Sue Sue");
         cSong.setGenre(genres.get(1));
         cSong.setDuration(4);
+        cSong.setUrl("http://localhost:8080/");
         cSong.setReleaseDate(new Date(2013, 12, 2));
         cSong.setArtist(lievTuk);
 
@@ -81,6 +83,7 @@ public class TestData {
         vSong.setTitle("Mong Manh Tinh Ve");
         vSong.setGenre(genres.get(1));
         vSong.setDuration(4);
+        vSong.setUrl("http://localhost:8080/");
         vSong.setReleaseDate(new Date(2013, 12, 2));
         vSong.setArtist(thùyChi);
 
@@ -88,6 +91,7 @@ public class TestData {
         sautiSong.setTitle("Short N' Sweet");
         sautiSong.setGenre(genres.get(1));
         sautiSong.setDuration(3);
+        sautiSong.setUrl("http://localhost:8080/");
         sautiSong.setReleaseDate(new Date(2013, 12, 2));
         sautiSong.setArtist(sautiSol);
 
@@ -96,6 +100,7 @@ public class TestData {
         secondSong.setTitle("Song in Album");
         secondSong.setGenre(genres.get(4));
         secondSong.setDuration(3);
+        secondSong.setUrl("http://localhost:8080/");
         secondSong.setReleaseDate(new Date(2013, 12, 2));
         secondSong.setArtist(artist);
 
@@ -103,6 +108,7 @@ public class TestData {
         thirdSong.setTitle("My Third song");
         thirdSong.setGenre(genres.get(6));
         thirdSong.setDuration(3);
+        thirdSong.setUrl("http://localhost:8080/");
         thirdSong.setReleaseDate(new Date(2013, 12, 2));
         thirdSong.setArtist(artist);
 
@@ -115,15 +121,17 @@ public class TestData {
         Song virtualSong=new Song();
         virtualSong.setTitle("Virtual Song for test");
         virtualSong.setArtist(virtualArtist);
+        virtualSong.setUrl("http://localhost:8080/");
 
-        songService.save(virtualSong);
+
+        //songService.save(virtualSong);
 
         //Add Album to Artist Object
         Album album = new Album("My First Album", new Date(3, 12, 2018));
-        album.addSong(secondSong);
+       // album.addSong(secondSong);
 
         Album secondAlbum = new Album("My Second Album", new Date(19, 12, 8));
-        secondAlbum.addSong(thirdSong);
+      //  secondAlbum.addSong(thirdSong);
         secondAlbum.addSong(song);
 
         artist.addAlbum(album);
@@ -140,7 +148,7 @@ public class TestData {
          */
         Chart chart = new Chart("Top 50 Iowa Hits");
         chart.addSong(song);
-        chart.addSong(sautiSong);
+      //  chart.addSong(sautiSong);
 
         chartService.save(chart);
 

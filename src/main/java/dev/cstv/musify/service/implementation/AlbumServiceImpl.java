@@ -1,5 +1,6 @@
-package dev.cstv.musify.service.Implementation;
+package dev.cstv.musify.service.implementation;
 
+import dev.cstv.musify.aop.ServiceValidation;
 import dev.cstv.musify.dao.AlbumDao;
 import dev.cstv.musify.domain.Album;
 import dev.cstv.musify.service.AlbumService;
@@ -16,6 +17,7 @@ public class AlbumServiceImpl implements AlbumService {
     @Autowired
     private AlbumDao albumDao;
 
+    @ServiceValidation
     @Override
     public void save(Album album) {
 
@@ -29,6 +31,7 @@ public class AlbumServiceImpl implements AlbumService {
 
     }
 
+    @ServiceValidation
     @Override
     public Album update(Album album) {
 

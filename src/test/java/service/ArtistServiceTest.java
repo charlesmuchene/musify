@@ -1,4 +1,4 @@
-package Service;
+package service;
 
 import dev.cstv.musify.domain.Artist;
 import dev.cstv.musify.service.ArtistService;
