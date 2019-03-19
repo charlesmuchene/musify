@@ -3,7 +3,7 @@ package validation;
 import dev.cstv.musify.domain.Artist;
 import dev.cstv.musify.domain.Song;
 import dev.cstv.musify.service.SongService;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import java.util.Date;

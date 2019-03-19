@@ -24,6 +24,7 @@ public class Playlist {
     @Column(name = "name", nullable = false)
     private String name;
 
+
     @NotNull(message = "{NotNull}")
     @Valid
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
@@ -52,6 +53,14 @@ public class Playlist {
         this.user = user;
     }
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     public String getName() {
         return name;
     }
@@ -70,5 +79,9 @@ public class Playlist {
 
     public User getUser() {
         return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }

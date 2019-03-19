@@ -30,7 +30,6 @@ public class Album {
     @JoinColumn(name = "album")
     private List<Song> songs = new ArrayList<Song>();
 
-    @NotNull(message = "{NotNull}")
     @Transient
     @ManyToOne(fetch = FetchType.LAZY)
     private Artist artist;

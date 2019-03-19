@@ -4,27 +4,18 @@ import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
 
 @Entity
-@Table(name = "UserCredentials")
+@Table(name = "Credentials")
 public class UserCredentials {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    private Long id;
-
-    @OneToOne(fetch = FetchType.EAGER)
-    private User user;
-
     @Pattern(regexp = "^[A-Z|a-z]+", message = "{Pattern}")
     @NotNull(message = "{NotNull}")
     @Length(min = 3,message = "{Length}")
-    @Column(name = "username", nullable = false)
+    @Column(name = "username", nullable = false, unique = true, length = 127)
     private String username;
 
     @NotNull(message = "{NotNull}")
@@ -37,8 +28,14 @@ public class UserCredentials {
     @Column(name = "email", nullable = false)
     private String email;
 
-    @Transient
+    @Column(name = "enabled", nullable = false)
+    private Boolean enabled = true;
+
+    @Column(name = "verifyPassword")
     private String verifyPassword;
+
+    @OneToOne(mappedBy="userCredentials", fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
+    private User user;
 
     public UserCredentials() {
     }
@@ -59,7 +56,6 @@ public class UserCredentials {
     }
 
     public UserCredentials(String username, String password, String email) {
-
         this.username = username;
         this.password = password;
         this.email = email;
@@ -87,6 +83,14 @@ public class UserCredentials {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public Boolean getEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(Boolean enabled) {
+        this.enabled = enabled;
     }
 
     public String getVerifyPassword() {

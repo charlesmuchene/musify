@@ -28,7 +28,7 @@ public class Song {
     @JoinColumn(name = "genre")
     private Genre genre;
 
-    @NotNull
+    @NotNull(message = "{NotNull}")
     @URL(message = "{URL}")
     @Column(name = "url")
     private String url;

@@ -10,6 +10,8 @@
 
     <context:property-placeholder location="classpath:application.properties"/>
     <context:property-placeholder location="classpath:validation/errorMessages.properties"/>
+    <import resource="classpath:context/security-context.xml"/>
+
 
     <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
         <property name="dataSource" ref="dataSource"/>
@@ -66,3 +68,5 @@
     <aop:aspectj-autoproxy />
 
 </beans>
+
+

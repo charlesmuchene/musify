@@ -23,6 +23,9 @@ public class TestData {
     @Autowired
     ChartService chartService;
 
+    @Autowired
+    GroupService groupService;
+
     public void load() {
 
         Artist artist = new Artist("Khaled");
@@ -64,6 +67,7 @@ public class TestData {
         song.setTitle("Better");
         song.setGenre(genres.get(0));
         song.setDuration(3);
+        song.setUrl("http://localhost:8080/");
         song.setReleaseDate(new Date(2013, 12, 2));
         song.setArtist(artist);
 
@@ -71,6 +75,7 @@ public class TestData {
         cSong.setTitle("Rom Sue Sue");
         cSong.setGenre(genres.get(1));
         cSong.setDuration(4);
+        cSong.setUrl("http://localhost:8080/");
         cSong.setReleaseDate(new Date(2013, 12, 2));
         cSong.setArtist(lievTuk);
 
@@ -78,6 +83,7 @@ public class TestData {
         vSong.setTitle("Mong Manh Tinh Ve");
         vSong.setGenre(genres.get(1));
         vSong.setDuration(4);
+        vSong.setUrl("http://localhost:8080/");
         vSong.setReleaseDate(new Date(2013, 12, 2));
         vSong.setArtist(thùyChi);
 
@@ -85,6 +91,7 @@ public class TestData {
         sautiSong.setTitle("Short N' Sweet");
         sautiSong.setGenre(genres.get(1));
         sautiSong.setDuration(3);
+        sautiSong.setUrl("http://localhost:8080/");
         sautiSong.setReleaseDate(new Date(2013, 12, 2));
         sautiSong.setArtist(sautiSol);
 
@@ -93,6 +100,7 @@ public class TestData {
         secondSong.setTitle("Song in Album");
         secondSong.setGenre(genres.get(4));
         secondSong.setDuration(3);
+        secondSong.setUrl("http://localhost:8080/");
         secondSong.setReleaseDate(new Date(2013, 12, 2));
         secondSong.setArtist(artist);
 
@@ -100,6 +108,7 @@ public class TestData {
         thirdSong.setTitle("My Third song");
         thirdSong.setGenre(genres.get(6));
         thirdSong.setDuration(3);
+        thirdSong.setUrl("http://localhost:8080/");
         thirdSong.setReleaseDate(new Date(2013, 12, 2));
         thirdSong.setArtist(artist);
 
@@ -112,15 +121,17 @@ public class TestData {
         Song virtualSong=new Song();
         virtualSong.setTitle("Virtual Song for test");
         virtualSong.setArtist(virtualArtist);
+        virtualSong.setUrl("http://localhost:8080/");
 
-        songService.save(virtualSong);
+
+        //songService.save(virtualSong);
 
         //Add Album to Artist Object
         Album album = new Album("My First Album", new Date(3, 12, 2018));
-        album.addSong(secondSong);
+       // album.addSong(secondSong);
 
         Album secondAlbum = new Album("My Second Album", new Date(19, 12, 8));
-        secondAlbum.addSong(thirdSong);
+      //  secondAlbum.addSong(thirdSong);
         secondAlbum.addSong(song);
 
         artist.addAlbum(album);
@@ -137,9 +148,32 @@ public class TestData {
          */
         Chart chart = new Chart("Top 50 Iowa Hits");
         chart.addSong(song);
-        chart.addSong(sautiSong);
+      //  chart.addSong(sautiSong);
 
         chartService.save(chart);
+
+        /*
+        * Init group user and authorities
+        * */
+
+        Group groupUser = new Group();
+        groupUser.setName("User");
+
+        Authority authority = new Authority();
+        authority.setAuthority("create");
+        groupUser.getAuthority().add(authority);
+
+        authority = new Authority();
+        authority.setAuthority("update");
+        groupUser.getAuthority().add(authority);
+
+        authority = new Authority();
+        authority.setAuthority("delete");
+        groupUser.getAuthority().add(authority);
+
+        authority = new Authority();
+        authority.setAuthority("list");
+        groupUser.getAuthority().add(authority);
 
         /*
         /Dummy data for Users
@@ -149,22 +183,37 @@ public class TestData {
         User user = new User("Steven", "Katabalwa");
         UserCredentials stevenCredentials = new UserCredentials(user, "stev", "stev", "stev@mail.com");
         user.setUserCredentials(stevenCredentials);
-        userService.save(user);
+        userService.saveFull(user);
 
         User secondUser = new User("Vorleak", "Chy");
         UserCredentials vorleakCredentials = new UserCredentials(secondUser, "vorleak", "vorleak", "vorleak@mail.com");
         secondUser.setUserCredentials(vorleakCredentials);
-        userService.save(secondUser);
+        userService.saveFull(secondUser);
 
         User charlo = new User("Charles", "Muchene");
         UserCredentials charlesCredentials = new UserCredentials(charlo, "charlo", "charlo", "charlo@mail.com");
         charlo.setUserCredentials(charlesCredentials);
-        userService.save(charlo);
+        userService.saveFull(charlo);
 
         User fourthUser = new User("Tuy", "Vo");
         UserCredentials tuyCredentials = new UserCredentials(fourthUser, "tuy", "tuy", "tuy@mail.com");
         fourthUser.setUserCredentials(tuyCredentials);
-        userService.save(fourthUser);
+        userService.saveFull(fourthUser);
+
+        UserCredentials johnUserCredentials = new UserCredentials("john", "john", "john@musify.com");
+        User johnUser = new User("John", "Smith", johnUserCredentials);
+        userService.saveFull(johnUser);
+
+        UserCredentials paulUserCredentials = new UserCredentials("paul", "paul", "paul@musify.com");
+        User paulUser = new User("Paul", "Smith", paulUserCredentials);
+        userService.saveFull(paulUser);
+
+        groupUser.getUserCredentials().add(stevenCredentials);
+        groupUser.getUserCredentials().add(vorleakCredentials);
+        groupUser.getUserCredentials().add(charlesCredentials);
+        groupUser.getUserCredentials().add(tuyCredentials);
+        groupUser.getUserCredentials().add(johnUserCredentials);
+        groupUser.getUserCredentials().add(paulUserCredentials);
 
         /*
         /
@@ -194,7 +243,12 @@ public class TestData {
 
         User derrivedUser=userService.findOne(1);
 
+        /*
+         * Create user group
+         * */
+
+        groupService.save(groupUser);
+
+        System.out.println("*** Loaded Dummy Data");
     }
-
-
 }

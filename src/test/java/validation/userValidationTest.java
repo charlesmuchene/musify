@@ -3,7 +3,7 @@ package validation;
 import dev.cstv.musify.domain.User;
 import dev.cstv.musify.domain.UserCredentials;
 import dev.cstv.musify.service.UserService;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 public class userValidationTest {

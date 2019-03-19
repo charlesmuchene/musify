@@ -1,4 +1,4 @@
-package dev.cstv.musify.service.Implementation;
+package dev.cstv.musify.service.implementation;
 
 import dev.cstv.musify.aop.ServiceValidation;
 import dev.cstv.musify.dao.GenreDao;
