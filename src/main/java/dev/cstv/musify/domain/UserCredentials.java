@@ -3,19 +3,11 @@ package dev.cstv.musify.domain;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "UserCredentials")
+@Table(name = "Credentials")
 public class UserCredentials {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    private Long id;
-
-    @OneToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
-    @JoinColumn(name ="id")
-    private User user;
-
-    @Column(name = "username", nullable = false)
+    @Column(name = "username", nullable = false, unique = true, length = 127)
     private String username;
 
     @Column(name = "password", nullable = false)
@@ -24,8 +16,14 @@ public class UserCredentials {
     @Column(name = "email", nullable = false)
     private String email;
 
-    @Transient
+    @Column(name = "enabled", nullable = false)
+    private Boolean enabled = true;
+
+    @Column(name = "verifyPassword")
     private String verifyPassword;
+
+    @OneToOne(mappedBy="userCredentials", fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
+    private User user;
 
     public UserCredentials() {
     }
@@ -40,6 +38,12 @@ public class UserCredentials {
 
     public UserCredentials(User user, String username, String password, String email) {
         this.user = user;
+        this.username = username;
+        this.password = password;
+        this.email = email;
+    }
+
+    public UserCredentials(String username, String password, String email) {
         this.username = username;
         this.password = password;
         this.email = email;
@@ -67,6 +71,14 @@ public class UserCredentials {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public Boolean getEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(Boolean enabled) {
+        this.enabled = enabled;
     }
 
     public String getVerifyPassword() {
