@@ -70,10 +70,6 @@ public class Song {
         return id;
     }
 
-    public Long getId() {
-        return id;
-    }
-
     public String getUrl() {
         return url;
     }
