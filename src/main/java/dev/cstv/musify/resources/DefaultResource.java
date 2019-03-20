@@ -6,11 +6,11 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 @Path("/")
-public class PlayResource {
+public class DefaultResource {
 
     @GET
-    @Produces(MediaType.TEXT_PLAIN)
+    @Produces(MediaType.TEXT_HTML)
     public String index() {
-        return "Welcome to CSTV API. Hit your preferred end point!";
+        return "<h1>Welcome to Musify API. Hit your preferred end point!</h1>";
     }
 }

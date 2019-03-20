@@ -131,9 +131,9 @@ public class Song {
     @Override
     public boolean equals(Object obj) {
 
-        if(obj==null || !(obj instanceof Song)) return  false;
+        if(!(obj instanceof Song)) return  false;
 
-        return this.getId()==((Song)obj).getId();
+        return this.getId().equals(((Song) obj).getId());
 
     }
 }

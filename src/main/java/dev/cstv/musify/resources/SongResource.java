@@ -28,4 +28,10 @@ public class SongResource {
         songService.save(song);
     }
 
+    @POST
+    @Path("/play/{id}")
+    public void play(@PathParam("id") Long id) {
+        songService.play(id);
+    }
+
 }
