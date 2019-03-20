@@ -1,11 +1,8 @@
-package dev.cstv.musify.main;
+package dev.cstv.musify.servlet;
 
-import dev.cstv.musify.resources.PlayResource;
-import dev.cstv.musify.resources.SongResource;
-import org.glassfish.jersey.server.ResourceConfig;
+import dev.cstv.musify.data.TestData;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
-import org.springframework.web.filter.RequestContextFilter;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;

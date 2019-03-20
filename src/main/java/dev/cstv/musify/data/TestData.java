@@ -1,4 +1,4 @@
-package dev.cstv.musify.main;
+package dev.cstv.musify.data;
 
 import dev.cstv.musify.domain.*;
 import dev.cstv.musify.service.*;
@@ -10,7 +10,7 @@ import java.util.Date;
 import java.util.List;
 
 @Component
-class TestData {
+public class TestData {
 
     @Autowired
     SongService songService;
@@ -26,7 +26,7 @@ class TestData {
     @Autowired
     GroupService groupService;
 
-    void load() {
+    public void load() {
 
         Artist artist = new Artist("Khaled");
         Artist sautiSol = new Artist("Sauti Sol");
