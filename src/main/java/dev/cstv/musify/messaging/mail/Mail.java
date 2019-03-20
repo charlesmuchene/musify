@@ -55,7 +55,6 @@ public class Mail implements Serializable {
         this.attachment = attachment;
     }
 
-
     public List<String> getReceipients() {
         return receipients;
     }
