@@ -7,7 +7,9 @@ import org.hibernate.validator.constraints.URL;
 import javax.persistence.*;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "Song")
@@ -53,6 +55,20 @@ public class Song {
     @JoinColumn(name = "artist")
     @JsonIgnore
     private Artist artist;
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "song")
+    private List<ChartSong> chartSongs = new ArrayList<>();
+
+    public List<ChartSong> getChartSongs() {
+        return chartSongs;
+    }
+
+    public void addChartSong(ChartSong chartSong) {
+        this.chartSongs.add(chartSong);
+    }
+
+    public Long getId() {
+        return id;
+    }
 
     public Long getId() {
         return id;
@@ -112,5 +128,14 @@ public class Song {
 
     public void setArtist(Artist artist) {
         this.artist = artist;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+
+        if(obj==null || !(obj instanceof Song)) return  false;
+
+        return this.getId()==((Song)obj).getId();
+
     }
 }
