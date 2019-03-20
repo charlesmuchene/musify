@@ -6,6 +6,9 @@
     <listener>
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
     </listener>
+    <listener>
+        <listener-class>dev.cstv.musify.servlet.MusifyServletContextListener</listener-class>
+    </listener>
     <servlet>
         <servlet-name>CentralServlet</servlet-name>
         <servlet-class>org.glassfish.jersey.servlet.ServletContainer</servlet-class>

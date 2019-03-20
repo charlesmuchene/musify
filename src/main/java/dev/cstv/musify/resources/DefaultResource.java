@@ -11,6 +11,6 @@ public class DefaultResource {
     @GET
     @Produces(MediaType.TEXT_HTML)
     public String index() {
-        return "<h1>Welcome to Musify API. Hit your preferred end point!</h1>";
+        return "<h2 style='text-align: center;'>Welcome to Musify API. Hit your preferred end point!</h2>";
     }
 }
