@@ -19,18 +19,18 @@ public class Chart {
     private Long id;
 
     @NotNull(message = "{NotNull}")
-    @Length(min = 5,message = "{Length}")
+    @Length(min = 5, message = "{Length}")
     @Column(name = "name", nullable = false)
     private String name;
 
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "chart_songs",joinColumns = @JoinColumn(name = "chart_id"),inverseJoinColumns = @JoinColumn(name = "song_id"))
-    private List<Song> songs = new ArrayList<Song>();
+    //@JoinTable(name = "chart_songs",joinColumns = @JoinColumn(name = "chart_id"),inverseJoinColumns = @JoinColumn(name = "song_id"))
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "chart")
+    private List<ChartSong> songs = new ArrayList<ChartSong>();
 
     public Chart() {
     }
 
-    public Chart(String name, List<Song> songs) {
+    public Chart(String name, List<ChartSong> songs) {
         this.name = name;
         this.songs = songs;
     }
@@ -47,11 +47,11 @@ public class Chart {
         this.name = name;
     }
 
-    public List<Song> getSongs() {
+    public List<ChartSong> getSongs() {
         return songs;
     }
 
-    public void addSong(Song song) {
+    public void addSong(ChartSong song) {
         this.songs.add(song);
     }
 }

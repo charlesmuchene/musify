@@ -26,12 +26,17 @@ public class SongServiceTest {
 
         Song song = new Song();
         song.setTitle("Better");
-        song.setGenre(genre);
+        //song.setGenre(genre);
+        song.setUrl("http://localhost:8080/");
         song.setDuration(3);
         song.setReleaseDate(new Date(2013,12,2));
         song.setArtist(artist);
 
         songService.save(song);
+
+        Song song1=songService.findOne(1);
+
+        songService.play(songService.findOne(1));
 
     }
 

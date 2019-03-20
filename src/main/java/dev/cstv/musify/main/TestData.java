@@ -1,6 +1,7 @@
 package dev.cstv.musify.main;
 
 import dev.cstv.musify.domain.*;
+import dev.cstv.musify.messaging.mail.MailTask;
 import dev.cstv.musify.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -22,6 +23,9 @@ public class TestData {
     UserService userService;
     @Autowired
     ChartService chartService;
+
+    @Autowired
+    MailTask mailTask;
 
     @Autowired
     GroupService groupService;
@@ -147,7 +151,11 @@ public class TestData {
           Create a chart
          */
         Chart chart = new Chart("Top 50 Iowa Hits");
-        chart.addSong(song);
+        ChartSong chartSong=new ChartSong(chart,song);
+        ChartSong chartSong2=new ChartSong(chart,sautiSong);
+
+        chart.addSong(chartSong);
+        chart.addSong(chartSong2);
       //  chart.addSong(sautiSong);
 
         chartService.save(chart);
@@ -155,7 +163,6 @@ public class TestData {
         /*
         * Init group user and authorities
         * */
-
         Group groupUser = new Group();
         groupUser.setName("User");
 
@@ -250,5 +257,14 @@ public class TestData {
         groupService.save(groupUser);
 
         System.out.println("*** Loaded Dummy Data");
+
+        Chart chart1=chartService.findOne(1);
+
+        songService.play(sautiSong);
+
+        mailTask.setRoutingKey("chart.mail");
+
+        mailTask.sendMail(userService.findOne(1),"A new chart has been created");
+
     }
 }

@@ -15,5 +15,6 @@ public interface SongService {
 
     public Song findOne(long id);
 
+    public Song play(Song song);
 
 }
