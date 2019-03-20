@@ -55,6 +55,8 @@ public class Song {
     @JoinColumn(name = "artist")
     @JsonIgnore
     private Artist artist;
+
+    @JsonIgnore
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "song")
     private List<ChartSong> chartSongs = new ArrayList<>();
 
@@ -64,10 +66,6 @@ public class Song {
 
     public void addChartSong(ChartSong chartSong) {
         this.chartSongs.add(chartSong);
-    }
-
-    public Long getId() {
-        return id;
     }
 
     public Long getId() {
