@@ -10,10 +10,10 @@ import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
 
 /**
- * SecurityApplication Servlet context listener
+ * Musify servlet context listener
  */
 @WebListener
-public class MainServletListener implements ServletContextListener {
+public class MusifyServletContextListener implements ServletContextListener {
 
     @Override
     public void contextInitialized(ServletContextEvent sce) {
