@@ -65,7 +65,7 @@
     <!-- Scan for  transaction-based resources -->
     <context:component-scan base-package="dev.cstv.musify"/>
 
-    <aop:aspectj-autoproxy />
+    <aop:aspectj-autoproxy/>
 
 </beans>
 
