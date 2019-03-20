@@ -10,6 +10,7 @@ public class SongOutput  implements Serializable{
 	private Date releaseDate;
     
     public SongOutput(SongMessage item) {
+    	this.item = item;
 		this.releaseDate = new Date();
 	}
 

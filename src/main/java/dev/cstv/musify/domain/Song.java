@@ -49,7 +49,7 @@ public class Song {
     @Column(name = "releaseDate")
     private Date releaseDate;
 
-    @NotNull(message = "{NotNull}")
+    //@NotNull(message = "{NotNull}")
     @Valid
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "artist")

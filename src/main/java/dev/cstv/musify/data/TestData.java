@@ -33,7 +33,7 @@ public class TestData {
         Artist artist = new Artist("Khaled");
         Artist sautiSol = new Artist("Sauti Sol");
         Artist lievTuk = new Artist("Liev Tuk");
-        Artist thuyChi = new Artist("Thùy Chi");
+        Artist thuyChi = new Artist("Thuy Chi");
         Artist virtualArtist = new Artist("Virtual Artist");
 
         Genre popGenre = new Genre("Pop");
