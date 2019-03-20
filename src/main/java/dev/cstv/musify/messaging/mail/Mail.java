@@ -1,9 +1,10 @@
 package dev.cstv.musify.messaging.mail;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Mail {
+public class Mail implements Serializable {
 
     private String receipient;
     private String message;

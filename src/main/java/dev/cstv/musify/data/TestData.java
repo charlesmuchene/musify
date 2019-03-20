@@ -247,6 +247,8 @@ public class TestData {
 
         System.out.println("*** Loaded Dummy Data ***");
 
+        Chart chart1=chartService.findOne(1);
+
         songService.play(sautiSong);
 
         mailTask.setRoutingKey("chart.mail");
