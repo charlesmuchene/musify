@@ -37,7 +37,7 @@ public class ChartSong {
         return plays;
     }
 
-    public void setPlays(int plays) {
+    public void setPlays(long plays) {
         this.plays = plays;
     }
 

@@ -160,11 +160,9 @@ public class TestData {
 
         chartService.save(chart);
 
-
         /*
         * Init group user and authorities
         * */
-
         Group groupUser = new Group();
         groupUser.setName("User");
 
@@ -262,7 +260,10 @@ public class TestData {
 
         Chart chart1=chartService.findOne(1);
 
+        songService.play(sautiSong);
+
         mailTask.setRoutingKey("chart.mail");
+
         mailTask.sendMail(userService.findOne(1),"A new chart has been created");
 
     }
