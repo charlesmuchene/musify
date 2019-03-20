@@ -1,10 +1,8 @@
 package dev.cstv.musify.domain;
 
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.validator.constraints.Range;
 import org.hibernate.validator.constraints.URL;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import javax.validation.Valid;
@@ -28,6 +26,7 @@ public class Song {
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "genre")
+    @JsonIgnore
     private Genre genre;
 
     @NotNull(message = "{NotNull}")
@@ -37,6 +36,7 @@ public class Song {
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "album")
+    @JsonIgnore
     private Album album;
 
     @NotNull
@@ -53,6 +53,7 @@ public class Song {
     @Valid
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "artist")
+    @JsonIgnore
     private Artist artist;
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "song")
     private List<ChartSong> chartSongs = new ArrayList<>();
@@ -63,6 +64,10 @@ public class Song {
 
     public void addChartSong(ChartSong chartSong) {
         this.chartSongs.add(chartSong);
+    }
+
+    public Long getId() {
+        return id;
     }
 
     public Long getId() {
