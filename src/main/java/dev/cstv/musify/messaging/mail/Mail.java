@@ -1,21 +1,33 @@
 package dev.cstv.musify.messaging.mail;
 
 import java.io.Serializable;
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class Mail implements Serializable {
 
-    private String receipient;
-    private String message;
     private Object attachment;
-    private List<String> receipients = new ArrayList<>();
+    private String receipient;
+    private String receipientName;
+    private String receipientEmail;
+    private String message;
+    private String chartTitle;
+    private List<String> songs;
+
+    private HashMap<String, String> receipients = new HashMap<>();
 
     public Mail() {
 
     }
 
-    public Mail(List<String> receipients, String message) {
+    public Mail(String receipientName, String receipientEmail, String chartTitle, List<String> songs) {
+        this.receipientName = receipientName;
+        this.receipientEmail = receipientEmail;
+        this.chartTitle = chartTitle;
+        this.songs = songs;
+    }
+
+    public Mail(HashMap<String,String> receipients, String message) {
         this.receipients = receipients;
         this.message = message;
     }
@@ -55,11 +67,12 @@ public class Mail implements Serializable {
         this.attachment = attachment;
     }
 
-    public List<String> getReceipients() {
+    public HashMap<String,String> getReceipients() {
         return receipients;
     }
 
-    public void addReceipient(String receipient) {
-        this.receipients.add(receipient);
+    public void addReceipient(String receipient,String name) {
+
+        this.receipients.put(receipient,name);
     }
 }
