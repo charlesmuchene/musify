@@ -13,7 +13,7 @@ import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
 
 /**
- * Main Servlet context listener
+ * SecurityApplication Servlet context listener
  */
 @WebListener
 public class MainServletListener implements ServletContextListener {

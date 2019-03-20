@@ -27,7 +27,7 @@ public class Playlist {
 
     @NotNull(message = "{NotNull}")
     @Valid
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user")
     private User user;
 
