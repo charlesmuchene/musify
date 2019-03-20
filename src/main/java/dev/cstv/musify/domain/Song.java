@@ -9,7 +9,9 @@ import org.springframework.format.annotation.DateTimeFormat;
 import javax.persistence.*;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "Song")
@@ -52,6 +54,17 @@ public class Song {
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "artist")
     private Artist artist;
+
+    public List<ChartSong> getChartSongs() {
+        return chartSongs;
+    }
+
+    public void addChartSong(ChartSong chartSong) {
+        this.chartSongs.add(chartSong);
+    }
+
+    @OneToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL, mappedBy ="song")
+    private List<ChartSong> chartSongs=new ArrayList<>();
 
     public String getUrl() {
         return url;
