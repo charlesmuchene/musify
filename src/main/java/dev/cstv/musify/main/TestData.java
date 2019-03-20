@@ -10,7 +10,7 @@ import java.util.Date;
 import java.util.List;
 
 @Component
-public class TestData {
+class TestData {
 
     @Autowired
     SongService songService;
@@ -26,12 +26,12 @@ public class TestData {
     @Autowired
     GroupService groupService;
 
-    public void load() {
+    void load() {
 
         Artist artist = new Artist("Khaled");
         Artist sautiSol = new Artist("Sauti Sol");
         Artist lievTuk = new Artist("Liev Tuk");
-        Artist thùyChi = new Artist("Thùy Chi");
+        Artist thuy_chi = new Artist("Thùy Chi");
         Artist virtualArtist=new Artist("Virtual Artist");
 
         Genre popGenre = new Genre("Pop");
@@ -85,7 +85,7 @@ public class TestData {
         vSong.setDuration(4);
         vSong.setUrl("http://localhost:8080/");
         vSong.setReleaseDate(new Date(2013, 12, 2));
-        vSong.setArtist(thùyChi);
+        vSong.setArtist(thuy_chi);
 
         Song sautiSong = new Song();
         sautiSong.setTitle("Short N' Sweet");
@@ -115,7 +115,7 @@ public class TestData {
         //Add Song to Artist Object
         artist.addSong(song);
         sautiSol.addSong(sautiSong);
-        thùyChi.addSong(vSong);
+        thuy_chi.addSong(vSong);
         lievTuk.addSong(cSong);
 
         Song virtualSong=new Song();
@@ -139,7 +139,7 @@ public class TestData {
 
         //Save Artist(s)
         artistService.save(artist);
-        artistService.save(thùyChi);
+        artistService.save(thuy_chi);
         artistService.save(lievTuk);
         artistService.save(sautiSol);
 
@@ -216,17 +216,13 @@ public class TestData {
         groupUser.getUserCredentials().add(paulUserCredentials);
 
         /*
-        /
         Create a playList for a user
          */
         Playlist playlist = new Playlist("Steven's Playlist", user);
 
         List<Song> songs = songService.findAll();
 
-        songs.forEach(s -> {
-
-            playlist.addSong(s);
-        });
+        songs.forEach(playlist::addSong);
 
         user.addPlaylist(playlist);
         userService.update(user);

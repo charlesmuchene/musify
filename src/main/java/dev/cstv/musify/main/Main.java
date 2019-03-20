@@ -22,9 +22,6 @@ public class Main {
 //        System.out.println("Musify");
 //        System.out.println("Bring Music to the World");
 //
-        ApplicationContext ctx = new ClassPathXmlApplicationContext("context/applicationContext.xml");
-        TestData testData = ctx.getBean("testData",TestData.class);
-//
 //        AuthenticationManager authenticationManager = (AuthenticationManager) ctx.getBean("authenticationManager");
 //
 //        PlaylistService playlistService = (PlaylistService)ctx.getBean("playlistServiceImpl");
@@ -33,8 +30,6 @@ public class Main {
 //
 //        // "Configured list of policies/rules
 //        policyList.put("Playlist", new PlaylistPolicy());
-
-        testData.load();
 
 //        System.out.println("\n!!! Please login, Use `john` for username and password to create one playlist for this user !!!");
 //        try {
