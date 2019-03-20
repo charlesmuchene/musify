@@ -1,6 +1,6 @@
 package dev.cstv.musify.security.rules;
 
-import dev.cstv.musify.main.Main;
+import dev.cstv.musify.main.SecurityApplication;
 import dev.cstv.musify.security.AuthenticateUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.PermissionEvaluator;
@@ -22,7 +22,7 @@ public class CustomPermissionEvaluator implements PermissionEvaluator {
     public boolean hasPermission(Authentication authentication, Object targetDomainObject, Object permission) {
 
         // Look up asset specific policy/rules from "configured list"
-        Policy policy = (Policy) Main.policyList.get(targetDomainObject.getClass().getSimpleName());
+        Policy policy = (Policy) SecurityApplication.policyList.get(targetDomainObject.getClass().getSimpleName());
         // Policy is ABAC type context [ User,      action,            asset]
         return policy.checkRules(authentication, (String)permission, targetDomainObject);
     }
