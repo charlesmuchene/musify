@@ -255,7 +255,7 @@ public class TestData {
 
         Chart chart1=chartService.findOne(1);
 
-        songService.play(sautiSong);
+//        songService.play(sautiSong);
 
         mailTask.setRoutingKey("chart.mail");
 
