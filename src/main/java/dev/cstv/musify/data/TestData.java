@@ -251,8 +251,7 @@ public class TestData {
 
         mailTask.setRoutingKey("chart.mail");
 
-       // mailTask.sendMail(userService.findOne(1),"A new chart has been created");
-        mailTask.sendMails(userService.findAll(),"Top 5 Songs",chartService.findOne(1));
+        mailTask.sendMail(userService.findOne(1),null,chartService.findOne(1));
 
 
     }
