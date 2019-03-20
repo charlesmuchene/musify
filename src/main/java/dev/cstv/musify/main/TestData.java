@@ -101,7 +101,7 @@ public class TestData {
 
         //Songs in Album
         Song secondSong = new Song();
-        secondSong.setTitle("Song in Album");
+        secondSong.setTitle("BatchSong in Album");
         secondSong.setGenre(genres.get(4));
         secondSong.setDuration(3);
         secondSong.setUrl("http://localhost:8080/");
@@ -116,14 +116,14 @@ public class TestData {
         thirdSong.setReleaseDate(new Date(2013, 12, 2));
         thirdSong.setArtist(artist);
 
-        //Add Song to Artist Object
+        //Add BatchSong to Artist Object
         artist.addSong(song);
         sautiSol.addSong(sautiSong);
         thùyChi.addSong(vSong);
         lievTuk.addSong(cSong);
 
         Song virtualSong=new Song();
-        virtualSong.setTitle("Virtual Song for test");
+        virtualSong.setTitle("Virtual BatchSong for test");
         virtualSong.setArtist(virtualArtist);
         virtualSong.setUrl("http://localhost:8080/");
 
@@ -248,23 +248,19 @@ public class TestData {
 
         userService.update(charlo);
 
-        User derrivedUser=userService.findOne(1);
 
         /*
          * Create user group
          * */
-
         groupService.save(groupUser);
 
         System.out.println("*** Loaded Dummy Data");
-
-        Chart chart1=chartService.findOne(1);
 
         songService.play(sautiSong);
 
         mailTask.setRoutingKey("chart.mail");
 
-        mailTask.sendMail(userService.findOne(1),"A new chart has been created");
-
+       // mailTask.sendMail(userService.findOne(1),"A new chart has been created");
+        mailTask.sendMails(userService.findAll(),"Top 5 Songs",chartService.findOne(1));
     }
 }

@@ -54,7 +54,6 @@ public class Mail {
         this.attachment = attachment;
     }
 
-
     public List<String> getReceipients() {
         return receipients;
     }

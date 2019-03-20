@@ -1,21 +1,19 @@
 package dev.cstv.musify.domain;
 
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
 import org.hibernate.validator.constraints.Range;
 import org.hibernate.validator.constraints.URL;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 @Entity
 @Table(name = "Song")
-public class Song {
+public class Song{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

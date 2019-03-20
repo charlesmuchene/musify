@@ -24,20 +24,22 @@ public class MailTaskImpl implements MailTask {
 
     @Log(message = "Mail Task has been sent to mail Server")
     @Override
-    public void sendMail(User user, String message) {
+    public void sendMail(User user, String message, Object attachment) {
 
         Mail mail = new Mail(user.getUserCredentials().getEmail(), message);
+        mail.setAttachment(attachment);
 
         rabbitTemplate.convertAndSend(mail);
     }
 
     @Log(message = "Mail Tasks have been sent to mail Server")
     @Override
-    public void sendMails(List<User> users, String message) {
+    public void sendMails(List<User> users, String message,Object attachment) {
 
         List<String> receipients = users.stream().map(user -> user.getUserCredentials().getEmail()).collect(Collectors.toList());
 
         Mail mail = new Mail(receipients, message);
+        mail.setAttachment(attachment);
 
         rabbitTemplate.convertAndSend(mail);
 
