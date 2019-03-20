@@ -5,9 +5,7 @@ import dev.cstv.musify.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @Component
 public class TestData {
@@ -31,8 +29,8 @@ public class TestData {
         Artist artist = new Artist("Khaled");
         Artist sautiSol = new Artist("Sauti Sol");
         Artist lievTuk = new Artist("Liev Tuk");
-        Artist thuy_chi = new Artist("Thùy Chi");
-        Artist virtualArtist=new Artist("Virtual Artist");
+        Artist thuyChi = new Artist("Thùy Chi");
+        Artist virtualArtist = new Artist("Virtual Artist");
 
         Genre popGenre = new Genre("Pop");
         Genre soulGenre = new Genre("Soul");
@@ -53,7 +51,6 @@ public class TestData {
         genres.add(hiphopGenre);
 
         genres.forEach(genre -> {
-
             genreService.save(genre);
         });
 
@@ -63,36 +60,41 @@ public class TestData {
         /*
         Create new Songs
          */
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.YEAR, 2013);
+        calendar.set(Calendar.MONTH, 12);
+        calendar.set(Calendar.DAY_OF_MONTH, 2);
+
         Song song = new Song();
         song.setTitle("Better");
         song.setGenre(genres.get(0));
         song.setDuration(3);
-        song.setUrl("http://localhost:8080/");
-        song.setReleaseDate(new Date(2013, 12, 2));
+        song.setUrl("http://127.0.0.1:5500/resources/music/1.mp3");
+        song.setReleaseDate(calendar.getTime());
         song.setArtist(artist);
 
         Song cSong = new Song();
         cSong.setTitle("Rom Sue Sue");
         cSong.setGenre(genres.get(1));
         cSong.setDuration(4);
-        cSong.setUrl("http://localhost:8080/");
-        cSong.setReleaseDate(new Date(2013, 12, 2));
+        cSong.setUrl("http://127.0.0.1:5500/resources/music/2.mp3");
+        cSong.setReleaseDate(calendar.getTime());
         cSong.setArtist(lievTuk);
 
         Song vSong = new Song();
         vSong.setTitle("Mong Manh Tinh Ve");
         vSong.setGenre(genres.get(1));
         vSong.setDuration(4);
-        vSong.setUrl("http://localhost:8080/");
-        vSong.setReleaseDate(new Date(2013, 12, 2));
-        vSong.setArtist(thuy_chi);
+        vSong.setUrl("http://127.0.0.1:5500/resources/music/1.mp3");
+        vSong.setReleaseDate(calendar.getTime());
+        vSong.setArtist(thuyChi);
 
         Song sautiSong = new Song();
         sautiSong.setTitle("Short N' Sweet");
         sautiSong.setGenre(genres.get(1));
         sautiSong.setDuration(3);
-        sautiSong.setUrl("http://localhost:8080/");
-        sautiSong.setReleaseDate(new Date(2013, 12, 2));
+        sautiSong.setUrl("http://127.0.0.1:5500/resources/music/2.mp3");
+        sautiSong.setReleaseDate(calendar.getTime());
         sautiSong.setArtist(sautiSol);
 
         //Songs in Album
@@ -100,38 +102,39 @@ public class TestData {
         secondSong.setTitle("Song in Album");
         secondSong.setGenre(genres.get(4));
         secondSong.setDuration(3);
-        secondSong.setUrl("http://localhost:8080/");
-        secondSong.setReleaseDate(new Date(2013, 12, 2));
+        secondSong.setUrl("http://127.0.0.1:5500/resources/music/1.mp3");
+        secondSong.setReleaseDate(calendar.getTime());
         secondSong.setArtist(artist);
 
         Song thirdSong = new Song();
         thirdSong.setTitle("My Third song");
         thirdSong.setGenre(genres.get(6));
         thirdSong.setDuration(3);
-        thirdSong.setUrl("http://localhost:8080/");
-        thirdSong.setReleaseDate(new Date(2013, 12, 2));
+        thirdSong.setUrl("http://127.0.0.1:5500/resources/music/2.mp3");
+        thirdSong.setReleaseDate(calendar.getTime());
         thirdSong.setArtist(artist);
 
         //Add Song to Artist Object
         artist.addSong(song);
         sautiSol.addSong(sautiSong);
-        thuy_chi.addSong(vSong);
+        thuyChi.addSong(vSong);
         lievTuk.addSong(cSong);
 
-        Song virtualSong=new Song();
+        Song virtualSong = new Song();
         virtualSong.setTitle("Virtual Song for test");
         virtualSong.setArtist(virtualArtist);
-        virtualSong.setUrl("http://localhost:8080/");
+        virtualSong.setUrl("http://127.0.0.1:5500/resources/music/1.mp3");
 
 
         //songService.save(virtualSong);
-
+        Calendar albumCalendar = Calendar.getInstance();
+        albumCalendar.set(2018, Calendar.DECEMBER, 3);
         //Add Album to Artist Object
-        Album album = new Album("My First Album", new Date(3, 12, 2018));
-       // album.addSong(secondSong);
-
-        Album secondAlbum = new Album("My Second Album", new Date(19, 12, 8));
-      //  secondAlbum.addSong(thirdSong);
+        Album album = new Album("My First Album", albumCalendar.getTime());
+        // album.addSong(secondSong);
+        albumCalendar.set(2019, Calendar.DECEMBER, 8);
+        Album secondAlbum = new Album("My Second Album", albumCalendar.getTime());
+        //  secondAlbum.addSong(thirdSong);
         secondAlbum.addSong(song);
 
         artist.addAlbum(album);
@@ -139,7 +142,7 @@ public class TestData {
 
         //Save Artist(s)
         artistService.save(artist);
-        artistService.save(thuy_chi);
+        artistService.save(thuyChi);
         artistService.save(lievTuk);
         artistService.save(sautiSol);
 
@@ -148,13 +151,13 @@ public class TestData {
          */
         Chart chart = new Chart("Top 50 Iowa Hits");
         chart.addSong(song);
-      //  chart.addSong(sautiSong);
+        //  chart.addSong(sautiSong);
 
         chartService.save(chart);
 
         /*
-        * Init group user and authorities
-        * */
+         * Init group user and authorities
+         * */
 
         Group groupUser = new Group();
         groupUser.setName("User");
@@ -237,14 +240,11 @@ public class TestData {
 
         userService.update(charlo);
 
-        User derrivedUser=userService.findOne(1);
-
         /*
          * Create user group
          * */
-
         groupService.save(groupUser);
 
-        System.out.println("*** Loaded Dummy Data");
+        System.out.println("*** Loaded Dummy Data ***");
     }
 }
