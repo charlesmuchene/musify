@@ -14,7 +14,7 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "Song")
-public class Song{
+public class Song {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -148,5 +148,47 @@ public class Song{
     @Override
     public int hashCode() {
         return Objects.hash(id, title, genre, url, album, duration, releaseDate, artist, chartSongs);
+    }
+
+    public static class Builder {
+        private Song song;
+
+        public Builder() {
+            song = new Song();
+        }
+
+        public Builder setTitle(String title) {
+            song.title = title;
+            return this;
+        }
+
+        public Builder setGenre(Genre genre) {
+            song.genre = genre;
+            return this;
+        }
+
+        public Builder setDuration(Integer duration) {
+            song.duration = duration;
+            return this;
+        }
+
+        public Builder setUrl(String url) {
+            song.url = url;
+            return this;
+        }
+
+        public Builder setReleaseDate(Date releaseDate) {
+            song.releaseDate = releaseDate;
+            return this;
+        }
+
+        public Builder setArtist(Artist artist) {
+            song.artist = artist;
+            return this;
+        }
+
+        public Song build() {
+            return song;
+        }
     }
 }
