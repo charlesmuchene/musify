@@ -58,6 +58,7 @@ public class SecurityApplication {
 
         System.out.println("\n!!! Please login, Use `paul` for username and password, Try to update a playlist that belongs to another user !!!");
 
+        //noinspection InfiniteLoopStatement
         while (true) {
             try {
                 authenticateUser.authenticate(authenticationManager);

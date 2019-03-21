@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Optional;
 
 
 @Service
@@ -48,27 +49,27 @@ public class SongServiceImpl implements SongService {
     }
 
     @Override
-    public Song play(Song song) {
+    public Song play(Long id) {
 
         List<Chart> chartList = chartDao.findAll();
 
         chartList.forEach(chart -> {
 
-            List<ChartSong> csongs=chart.getSongs();
+            List<ChartSong> chartSongs = chart.getSongs();
 
-            ChartSong chartSong = chart.getSongs().stream().filter(cs -> cs.getSong().equals(song)).findAny().get();
+            Optional<ChartSong> chartSong = chartSongs.stream().filter(cs -> cs.getSong().getId().equals(id)).findAny();
 
-            if (chartSong != null) {
+            if (chartSong.isPresent()) {
 
-                long plays = chartSong.getPlays();
+                long plays = chartSong.get().getPlays();
 
-                chart.getSongs().get(chart.getSongs().indexOf(chartSong)).setPlays(plays + 1);
+                chartSongs.get(chartSongs.indexOf(chartSong.get())).setPlays(plays + 1);
 
                 chartDao.update(chart);
             }
 
         });
 
-        return findOne(song.getId());
+        return findOne(id);
     }
 }

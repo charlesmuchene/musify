@@ -148,17 +148,17 @@ public class TestData {
           Create a chart
          */
         Chart chart = new Chart("Top 50 Iowa Hits");
-        ChartSong chartSong=new ChartSong(chart,song);
-        ChartSong chartSong2=new ChartSong(chart,sautiSong);
+        ChartSong chartSong = new ChartSong(chart, song);
+        ChartSong chartSong2 = new ChartSong(chart, sautiSong);
 
         chart.addSong(chartSong);
         chart.addSong(chartSong2);
-        
+
         chartService.save(chart);
 
         /*
-        * Init group user and authorities
-        * */
+         * Init group user and authorities
+         * */
         Group groupUser = new Group();
         groupUser.setName("User");
 
@@ -228,6 +228,7 @@ public class TestData {
         songs.forEach(playlist::addSong);
 
         user.addPlaylist(playlist);
+
         userService.update(user);
 
         Playlist charloPlaylist = new Playlist("Charlo's Playlist", charlo);
@@ -245,16 +246,11 @@ public class TestData {
          * */
         groupService.save(groupUser);
 
-        System.out.println("*** Loaded Dummy Data ***");
-
-        Chart chart1=chartService.findOne(1);
-
-        songService.play(sautiSong);
-
         mailTask.setRoutingKey("chart.mail");
 
-        mailTask.sendMail(userService.findOne(1),null,chartService.findOne(1));
+        mailTask.sendMail(userService.findOne(1), null, chartService.findOne(1));
 
+        System.out.println("*** Loaded Dummy Data ***");
 
     }
 }

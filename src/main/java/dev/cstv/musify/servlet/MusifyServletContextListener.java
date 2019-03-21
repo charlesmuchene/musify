@@ -1,6 +1,7 @@
 package dev.cstv.musify.servlet;
 
 import dev.cstv.musify.data.TestData;
+import org.springframework.core.annotation.Order;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
@@ -10,15 +11,13 @@ import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
 
 /**
- * SecurityApplication Servlet context listener
+ * Musify servlet context listener
  */
-@WebListener
-public class MainServletListener implements ServletContextListener {
+public class MusifyServletContextListener implements ServletContextListener {
 
     @Override
     public void contextInitialized(ServletContextEvent sce) {
-        TestData testData = getBean(sce, "testData", TestData.class);
-        testData.load();
+        getBean(sce, "testData", TestData.class).load();
     }
 
     @Override
