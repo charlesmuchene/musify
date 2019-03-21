@@ -63,4 +63,14 @@ public class Artist {
 
         this.songs.add(song);
     }
+
+    @Override
+    public String toString() {
+        return "Artist{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", songs=" + songs +
+                ", albums=" + albums +
+                '}';
+    }
 }

@@ -18,6 +18,7 @@ public class SongCollectorMessageListener implements MessageListener {
 
 	@Autowired
 	SongService songService;
+
 	@Autowired
 	ArtistService artistService;
 
@@ -34,9 +35,12 @@ public class SongCollectorMessageListener implements MessageListener {
 			song.setUrl(songOutput.getItem().getUrl());
 			song.setReleaseDate(songOutput.getReleaseDate());
 			song.setDuration(1);
-			//song.setArtist(getOrCreateArtist(song));
-
-			songService.save(song);
+			Artist artist = artistService.findAll().get(0);
+			System.out.println("Got artist ... " + artist);
+			song.setArtist(artist);
+			artist.addSong(song);
+			System.out.println("We are watching you!!!");
+			artistService.update(artist);
 
 		} catch (JMSException e1) {
 			// TODO Auto-generated catch block
@@ -46,7 +50,6 @@ public class SongCollectorMessageListener implements MessageListener {
 	}
 
 	private Artist getOrCreateArtist(Song song) {
-		
 		if (!CollectionUtils.isEmpty(artistService.findAll())) {
 			return artistService.findAll().get(0);
 		}

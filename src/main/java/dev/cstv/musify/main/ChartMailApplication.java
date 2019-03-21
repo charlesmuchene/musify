@@ -14,13 +14,12 @@ import java.util.List;
 
 public class ChartMailApplication {
     public static void main(String[] args) {
-        ApplicationContext ctx = new ClassPathXmlApplicationContext("context/applicationContext.xml");
-        TestData testData = ctx.getBean("testData", TestData.class);
-        testData.load();
+        ApplicationContext context = new ClassPathXmlApplicationContext("context/applicationContext.xml");
+        context.getBean("testData", TestData.class).load();
 
-        MailTask mailTask = (MailTask) ctx.getBean("mailTaskImpl");
-        UserService userService = (UserService) ctx.getBean("userServiceImpl");
-        ChartService chartService = (ChartService) ctx.getBean("chartServiceImpl");
+        MailTask mailTask = (MailTask) context.getBean("mailTaskImpl");
+        UserService userService = (UserService) context.getBean("userServiceImpl");
+        ChartService chartService = (ChartService) context.getBean("chartServiceImpl");
 
         mailTask.setRoutingKey("chart.mail");
 
@@ -31,7 +30,7 @@ public class ChartMailApplication {
         users.add(userService.findOne(3));
 
         users.forEach(user ->
-            mailTask.sendMail(user, chart)
+                mailTask.sendMail(user, chart)
         );
 
         System.out.println("*** Send mail object to mailQueue ***");
