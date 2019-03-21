@@ -33,7 +33,7 @@ public class TestData {
         Artist artist = new Artist("Khaled");
         Artist sautiSol = new Artist("Sauti Sol");
         Artist lievTuk = new Artist("Liev Tuk");
-        Artist thuyChi = new Artist("Thùy Chi");
+        Artist thuyChi = new Artist("Thuy Chi");
         Artist virtualArtist = new Artist("Virtual Artist");
 
         Genre popGenre = new Genre("Pop");
@@ -103,7 +103,7 @@ public class TestData {
 
         //Songs in Album
         Song secondSong = new Song();
-        secondSong.setTitle("Song in Album");
+        secondSong.setTitle("BatchSong in Album");
         secondSong.setGenre(genres.get(4));
         secondSong.setDuration(3);
         secondSong.setUrl("http://127.0.0.1:5500/resources/music/1.mp3");
@@ -118,17 +118,11 @@ public class TestData {
         thirdSong.setReleaseDate(calendar.getTime());
         thirdSong.setArtist(artist);
 
-        //Add Song to Artist Object
+        //Add BatchSong to Artist Object
         artist.addSong(song);
         sautiSol.addSong(sautiSong);
         thuyChi.addSong(vSong);
         lievTuk.addSong(cSong);
-
-        Song virtualSong = new Song();
-        virtualSong.setTitle("Virtual Song for test");
-        virtualSong.setArtist(virtualArtist);
-        virtualSong.setUrl("http://127.0.0.1:5500/resources/music/1.mp3");
-
 
         //songService.save(virtualSong);
         Calendar albumCalendar = Calendar.getInstance();
@@ -254,7 +248,7 @@ public class TestData {
 
         mailTask.setRoutingKey("chart.mail");
 
-        mailTask.sendMail(userService.findOne(1), "A new chart has been created");
+        mailTask.sendMail(userService.findOne(1), null, chartService.findOne(1));
 
         System.out.println("*** Loaded Dummy Data ***");
 

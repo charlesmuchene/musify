@@ -14,7 +14,7 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "Song")
-public class Song {
+public class Song{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -50,7 +50,7 @@ public class Song {
     @Column(name = "releaseDate")
     private Date releaseDate;
 
-    @NotNull(message = "{NotNull}")
+    //@NotNull(message = "{NotNull}")
     @Valid
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "artist")
