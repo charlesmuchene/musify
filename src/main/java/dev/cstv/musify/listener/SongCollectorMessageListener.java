@@ -35,12 +35,7 @@ public class SongCollectorMessageListener implements MessageListener {
 			song.setUrl(songOutput.getItem().getUrl());
 			song.setReleaseDate(songOutput.getReleaseDate());
 			song.setDuration(1);
-			Artist artist = artistService.findAll().get(0);
-			System.out.println("Got artist ... " + artist);
-			song.setArtist(artist);
-			artist.addSong(song);
-			System.out.println("We are watching you!!!");
-			artistService.update(artist);
+			songService.save(song);
 
 		} catch (JMSException e1) {
 			// TODO Auto-generated catch block
