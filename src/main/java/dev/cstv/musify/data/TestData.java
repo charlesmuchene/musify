@@ -23,9 +23,6 @@ public class TestData {
     ChartService chartService;
 
     @Autowired
-    MailTask mailTask;
-
-    @Autowired
     GroupService groupService;
 
     public void load() {
@@ -245,10 +242,6 @@ public class TestData {
          * Create user group
          * */
         groupService.save(groupUser);
-
-        mailTask.setRoutingKey("chart.mail");
-
-        mailTask.sendMail(userService.findOne(1), null, chartService.findOne(1));
 
         System.out.println("*** Loaded Dummy Data ***");
 
