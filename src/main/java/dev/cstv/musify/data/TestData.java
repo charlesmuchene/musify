@@ -31,7 +31,6 @@ public class TestData {
         Artist sautiSol = new Artist("Sauti Sol");
         Artist lievTuk = new Artist("Liev Tuk");
         Artist thuyChi = new Artist("Thuy Chi");
-        Artist virtualArtist = new Artist("Virtual Artist");
 
         Genre popGenre = new Genre("Pop");
         Genre soulGenre = new Genre("Soul");
@@ -42,7 +41,7 @@ public class TestData {
         Genre hiphopGenre = new Genre("Hip Hop");
 
         //Add All other genres
-        List<Genre> genres = new ArrayList<Genre>();
+        List<Genre> genres = new ArrayList<>();
         genres.add(soulGenre);
         genres.add(popGenre);
         genres.add(rockGenre);
@@ -51,9 +50,7 @@ public class TestData {
         genres.add(classicalGenre);
         genres.add(hiphopGenre);
 
-        genres.forEach(genre -> {
-            genreService.save(genre);
-        });
+        genres.forEach(genre -> genreService.save(genre));
 
         //getAllGenres
         genres = genreService.findAll();
@@ -66,60 +63,68 @@ public class TestData {
         calendar.set(Calendar.MONTH, 12);
         calendar.set(Calendar.DAY_OF_MONTH, 2);
 
-        Song song = new Song();
-        song.setTitle("Better");
-        song.setGenre(genres.get(0));
-        song.setDuration(3);
-        song.setUrl("http://127.0.0.1:5500/resources/music/1.mp3");
-        song.setReleaseDate(calendar.getTime());
-        song.setArtist(artist);
+        Song song = new Song.Builder()
+                .setTitle("Better")
+                .setGenre(genres.get(0))
+                .setDuration(3)
+                .setUrl("http://127.0.0.1:5500/resources/music/3.mp3")
+                .setReleaseDate(calendar.getTime())
+                .setArtist(artist)
+                .build();
 
-        Song cSong = new Song();
-        cSong.setTitle("Rom Sue Sue");
-        cSong.setGenre(genres.get(1));
-        cSong.setDuration(4);
-        cSong.setUrl("http://127.0.0.1:5500/resources/music/2.mp3");
-        cSong.setReleaseDate(calendar.getTime());
-        cSong.setArtist(lievTuk);
+        Song cSong = new Song.Builder()
+                .setTitle("Short N' Sweet")
+                .setGenre(genres.get(1))
+                .setDuration(4)
+                .setUrl("http://127.0.0.1:5500/resources/music/4.mp3")
+                .setReleaseDate(calendar.getTime())
+                .setArtist(sautiSol)
+                .build();
 
-        Song vSong = new Song();
-        vSong.setTitle("Mong Manh Tinh Ve");
-        vSong.setGenre(genres.get(1));
-        vSong.setDuration(4);
-        vSong.setUrl("http://127.0.0.1:5500/resources/music/1.mp3");
-        vSong.setReleaseDate(calendar.getTime());
-        vSong.setArtist(thuyChi);
+        Song vSong = new Song.Builder()
+                .setTitle("One love")
+                .setGenre(genres.get(1))
+                .setDuration(4)
+                .setUrl("http://127.0.0.1:5500/resources/music/1.mp3")
+                .setReleaseDate(calendar.getTime())
+                .setArtist(thuyChi)
+                .build();
 
-        Song sautiSong = new Song();
-        sautiSong.setTitle("Short N' Sweet");
-        sautiSong.setGenre(genres.get(1));
-        sautiSong.setDuration(3);
-        sautiSong.setUrl("http://127.0.0.1:5500/resources/music/2.mp3");
-        sautiSong.setReleaseDate(calendar.getTime());
-        sautiSong.setArtist(sautiSol);
+        Song sautiSong = new Song.Builder()
+                .setTitle("Fall")
+                .setGenre(genres.get(1))
+                .setDuration(3)
+                .setUrl("http://127.0.0.1:5500/resources/music/2.mp3")
+                .setReleaseDate(calendar.getTime())
+                .setArtist(sautiSol)
+                .build();
 
         //Songs in Album
-        Song secondSong = new Song();
-        secondSong.setTitle("BatchSong in Album");
-        secondSong.setGenre(genres.get(4));
-        secondSong.setDuration(3);
-        secondSong.setUrl("http://127.0.0.1:5500/resources/music/1.mp3");
-        secondSong.setReleaseDate(calendar.getTime());
-        secondSong.setArtist(artist);
+        Song secondSong = new Song.Builder()
+                .setTitle("Going Raggae")
+                .setGenre(genres.get(4))
+                .setDuration(3)
+                .setUrl("http://127.0.0.1:5500/resources/music/1.mp3")
+                .setReleaseDate(calendar.getTime())
+                .setArtist(artist)
+                .build();
 
-        Song thirdSong = new Song();
-        thirdSong.setTitle("My Third song");
-        thirdSong.setGenre(genres.get(6));
-        thirdSong.setDuration(3);
-        thirdSong.setUrl("http://127.0.0.1:5500/resources/music/2.mp3");
-        thirdSong.setReleaseDate(calendar.getTime());
-        thirdSong.setArtist(artist);
+        Song thirdSong = new Song.Builder()
+                .setTitle("Lagos")
+                .setGenre(genres.get(6))
+                .setDuration(3)
+                .setUrl("http://127.0.0.1:5500/resources/music/2.mp3")
+                .setReleaseDate(calendar.getTime())
+                .setArtist(lievTuk)
+                .build();
 
         //Add BatchSong to Artist Object
         artist.addSong(song);
         sautiSol.addSong(sautiSong);
         thuyChi.addSong(vSong);
-        lievTuk.addSong(cSong);
+        sautiSol.addSong(cSong);
+        artist.addSong(secondSong);
+        lievTuk.addSong(thirdSong);
 
         //songService.save(virtualSong);
         Calendar albumCalendar = Calendar.getInstance();
@@ -145,11 +150,13 @@ public class TestData {
           Create a chart
          */
         Chart chart = new Chart("Top 50 Iowa Hits");
-        ChartSong chartSong = new ChartSong(chart, song);
-        ChartSong chartSong2 = new ChartSong(chart, sautiSong);
+        ChartSong chartSong = new ChartSong(chart, vSong);
+        ChartSong chartSong2 = new ChartSong(chart, cSong);
+        ChartSong chartSong3 = new ChartSong(chart, sautiSong);
 
         chart.addSong(chartSong);
         chart.addSong(chartSong2);
+        chart.addSong(chartSong3);
 
         chartService.save(chart);
 
