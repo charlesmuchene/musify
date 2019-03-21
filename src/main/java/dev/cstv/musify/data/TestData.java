@@ -181,17 +181,17 @@ public class TestData {
         */
 
         User user = new User("Steven", "Katabalwa");
-        UserCredentials stevenCredentials = new UserCredentials(user, "stev", "stev", "vorleak.chy@gmail.com");
+        UserCredentials stevenCredentials = new UserCredentials(user, "stev", "stev", "stek32@gmail.com");
         user.setUserCredentials(stevenCredentials);
         userService.saveFull(user);
 
         User secondUser = new User("Vorleak", "Chy");
-        UserCredentials vorleakCredentials = new UserCredentials(secondUser, "vorleak", "vorleak", "vorleak@mail.com");
+        UserCredentials vorleakCredentials = new UserCredentials(secondUser, "vorleak", "vorleak", "vorleak.chy@gmail.com");
         secondUser.setUserCredentials(vorleakCredentials);
         userService.saveFull(secondUser);
 
         User charlo = new User("Charles", "Muchene");
-        UserCredentials charlesCredentials = new UserCredentials(charlo, "charlo", "charlo", "charlo@mail.com");
+        UserCredentials charlesCredentials = new UserCredentials(charlo, "charlo", "charlo", "senseidev@gmail.com");
         charlo.setUserCredentials(charlesCredentials);
         userService.saveFull(charlo);
 
