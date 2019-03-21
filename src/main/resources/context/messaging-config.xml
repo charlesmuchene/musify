@@ -11,23 +11,24 @@
     <rabbit:connection-factory id="connectionFactory2" host="localhost" username="joe" password="joe"/>
 
     <rabbit:queue name="FromBatchSong" durable="false" auto-delete="true" exclusive="false"/>
-    <rabbit:queue name="FromBatchChart" durable="false" auto-delete="true" exclusive="false"/>
+    <!--<rabbit:queue name="FromBatchChart" durable="false" auto-delete="true" exclusive="false"/>-->
 
     <rabbit:topic-exchange name="Music">
         <rabbit:bindings>
             <rabbit:binding queue="FromBatchSong" pattern="batch.songs"/>
-            <rabbit:binding queue="FromBatchChart" pattern="batch.charts"/>
+            <!--<rabbit:binding queue="FromBatchChart" pattern="batch.charts"/>-->
         </rabbit:bindings>
     </rabbit:topic-exchange>
 
     <!-- Get All Songs Or Charts from Batch -->
     <rabbit:listener-container connection-factory="connectionFactory2">
         <rabbit:listener ref="SongQueueListener" method="listen" queue-names="FromBatchSong"/>
-        <rabbit:listener ref="ChartQueueListener" method="listen" queue-names="FromBatchChart"/>
+        <!--<rabbit:listener ref="ChartQueueListener" method="listen" queue-names="FromBatchChart"/>-->
     </rabbit:listener-container>
 
-    <bean id="SongQueueListener" class="dev.cstv.musify.messaging.SongQueueListener"/>
     <bean id="ChartQueueListener" class="dev.cstv.musify.messaging.ChartQueueListener"/>
+    <bean id="SongQueueListener" class="dev.cstv.musify.messaging.SongQueueListener"/>
+
 
 
     <!-- Delegate To Mail Server -->
