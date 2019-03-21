@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 public class SongMessage implements Serializable {
-	
+
 	private String title;
 
 	private String url;

@@ -20,7 +20,7 @@ public class Song{
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "title", length = 50, nullable = false)
+    @Column(name = "title", length = 500, nullable = false)
     @NotNull(message = "{NotNull}")
     private String title;
 
