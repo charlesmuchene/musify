@@ -50,26 +50,5 @@ public class MailTaskImpl implements MailTask {
     @Log(message = "Mail Tasks have been sent to mail Server")
     @Override
     public void sendMails(List<User> users, String message, Object attachment) {
-
-        HashMap<String, String> recipients = new HashMap<>();
-
-        users.forEach(user -> {
-
-            String email = user.getUserCredentials().getEmail();
-
-            recipients.put(email, user.getFirstName());
-
-        });
-
-        Mail mail = new Mail(recipients, message);
-        mail.setAttachment(attachment);
-
-//        JSONObject mail = new JSONObject();
-//        mail.put("message", message);
-//        mail.put("recipients", recipients);
-//        mail.put("attachment", attachment);
-
-        rabbitTemplate.convertAndSend(mail);
-
     }
 }

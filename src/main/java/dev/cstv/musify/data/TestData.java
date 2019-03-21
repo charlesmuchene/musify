@@ -184,7 +184,7 @@ public class TestData {
         */
 
         User user = new User("Steven", "Katabalwa");
-        UserCredentials stevenCredentials = new UserCredentials(user, "stev", "stev", "stev@mail.com");
+        UserCredentials stevenCredentials = new UserCredentials(user, "stev", "stev", "vorleak.chy@gmail.com");
         user.setUserCredentials(stevenCredentials);
         userService.saveFull(user);
 
