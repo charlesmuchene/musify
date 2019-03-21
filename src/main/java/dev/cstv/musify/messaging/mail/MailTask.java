@@ -7,9 +7,7 @@ import java.util.List;
 
 public interface MailTask {
 
-    void sendMail(User user, String Message, Chart chart);
-
-    void sendMails(List<User> users,String Message,Object attachment);
+    void sendMail(User user, Chart chart);
 
     void setRoutingKey(String key);
 
