@@ -19,9 +19,7 @@ public interface Policy {
  	// Check for permission 
  	public default Boolean hasActionAuthority(String action) {
 		Collection<? extends GrantedAuthority> authorities = SecurityContextHolder.getContext().getAuthentication().getAuthorities();
- 		if (!authorities.contains(new SimpleGrantedAuthority(action)) ) 
- 			return false;
- 		return true;
- 	}
+		return authorities.contains(new SimpleGrantedAuthority(action));
+	}
  	
   }

@@ -1,46 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans:beans xmlns="http://www.springframework.org/schema/integration"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns:beans="http://www.springframework.org/schema/beans"
-	xmlns:amqp="http://www.springframework.org/schema/integration/amqp"
-	xmlns:jms="http://www.springframework.org/schema/integration/jms"
-	xmlns:stream="http://www.springframework.org/schema/integration/stream"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xmlns:beans="http://www.springframework.org/schema/beans"
+             xmlns:amqp="http://www.springframework.org/schema/integration/amqp"
+             xmlns:jms="http://www.springframework.org/schema/integration/jms"
+             xsi:schemaLocation="http://www.springframework.org/schema/beans
 			http://www.springframework.org/schema/beans/spring-beans.xsd
-			http://www.springframework.org/schema/context
-			http://www.springframework.org/schema/context/spring-context.xsd
 			http://www.springframework.org/schema/integration
 			http://www.springframework.org/schema/integration/spring-integration.xsd
  			http://www.springframework.org/schema/integration/amqp 
  				http://www.springframework.org/schema/integration/amqp/spring-integration-amqp.xsd
      		http://www.springframework.org/schema/integration/jms
-			http://www.springframework.org/schema/integration/jms/spring-integration-jms.xsd
-			http://www.springframework.org/schema/integration/stream
-			http://www.springframework.org/schema/integration/stream/spring-integration-stream.xsd">
+			http://www.springframework.org/schema/integration/jms/spring-integration-jms.xsd">
 
-<!-- Order is actually from remote AMQP source ...NOT from an EIP Gateway -->
- <!-- connection-factory="amqpConnectionFactory" -->
-	<channel id="fromAmqpSongCollectorChannel" />
-	<amqp:inbound-channel-adapter channel="fromAmqpSongCollectorChannel"
-		queue-names="musicCollectorDirectQueue"
-		
-		connection-factory="amqpConnectionFactory"
-		id="songCollectorChannelAdapter" />
+    <!-- Order is actually from remote AMQP source ...NOT from an EIP Gateway -->
+    <channel id="fromAmqpSongCollectorChannel"/>
+    <amqp:inbound-channel-adapter channel="fromAmqpSongCollectorChannel"
+                                  queue-names="musicCollectorDirectQueue"
 
-	
- 	<beans:bean id="songCollectorTransformer" class="dev.cstv.musify.amqp.SongTransformerImpl" />
- 
- 	<transformer id="transformOrder" ref="songCollectorTransformer"  input-channel="fromAmqpSongCollectorChannel" 
- 	output-channel="processSong" />
+                                  connection-factory="amqpConnectionFactory"
+                                  id="songCollectorChannelAdapter"/>
 
- 	<channel id="processSong"></channel>
+    <beans:bean id="songCollectorTransformer" class="dev.cstv.musify.amqp.SongTransformerImpl"/>
 
-  	<jms:outbound-channel-adapter id="jmsoutSongCollector"
- 		channel="processSong" destination="songCollectorQueue"> </jms:outbound-channel-adapter>
+    <transformer id="transformOrder" ref="songCollectorTransformer" input-channel="fromAmqpSongCollectorChannel"
+                 output-channel="processSong"/>
 
-<!-- 
- 	<jms:outbound-channel-adapter id="jsmoutHighPrice"
- 	 channel="highPrice" destination="highPriceQueue"></jms:outbound-channel-adapter> -->
+    <channel id="processSong"/>
 
- 	   
+    <jms:outbound-channel-adapter id="jmsoutSongCollector"
+                                  channel="processSong" destination="songCollectorQueue"/>
+
 </beans:beans>

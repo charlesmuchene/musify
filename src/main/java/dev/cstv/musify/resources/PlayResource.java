@@ -1,16 +1,24 @@
 package dev.cstv.musify.resources;
 
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
+import dev.cstv.musify.service.SongService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 
-@Path("/")
+@Path("/play")
+@Component
+@Produces(MediaType.APPLICATION_JSON)
+@Consumes(MediaType.APPLICATION_JSON)
 public class PlayResource {
 
-    @GET
-    @Produces(MediaType.TEXT_PLAIN)
-    public String index() {
-        return "Welcome to CSTV API. Hit your preferred end point!";
+    @Autowired
+    private SongService songService;
+
+    @POST
+    @Path("/{id}")
+    public void play(@PathParam("id") Long id) {
+        songService.play(id);
     }
 }

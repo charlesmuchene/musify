@@ -10,10 +10,11 @@ import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 @Table(name = "Song")
-public class Song{
+public class Song {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -49,12 +50,14 @@ public class Song{
     @Column(name = "releaseDate")
     private Date releaseDate;
 
-    //@NotNull(message = "{NotNull}")
+    @NotNull(message = "{NotNull}")
     @Valid
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "artist")
     @JsonIgnore
     private Artist artist;
+
+    @JsonIgnore
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "song")
     private List<ChartSong> chartSongs = new ArrayList<>();
 
@@ -127,11 +130,65 @@ public class Song{
     }
 
     @Override
-    public boolean equals(Object obj) {
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Song)) return false;
+        Song song = (Song) o;
+        return Objects.equals(id, song.id) &&
+                Objects.equals(title, song.title) &&
+                Objects.equals(genre, song.genre) &&
+                Objects.equals(url, song.url) &&
+                Objects.equals(album, song.album) &&
+                Objects.equals(duration, song.duration) &&
+                Objects.equals(releaseDate, song.releaseDate) &&
+                Objects.equals(artist, song.artist) &&
+                Objects.equals(chartSongs, song.chartSongs);
+    }
 
-        if(obj==null || !(obj instanceof Song)) return  false;
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, title, genre, url, album, duration, releaseDate, artist, chartSongs);
+    }
 
-        return this.getId()==((Song)obj).getId();
+    public static class Builder {
+        private Song song;
 
+        public Builder() {
+            song = new Song();
+        }
+
+        public Builder setTitle(String title) {
+            song.title = title;
+            return this;
+        }
+
+        public Builder setGenre(Genre genre) {
+            song.genre = genre;
+            return this;
+        }
+
+        public Builder setDuration(Integer duration) {
+            song.duration = duration;
+            return this;
+        }
+
+        public Builder setUrl(String url) {
+            song.url = url;
+            return this;
+        }
+
+        public Builder setReleaseDate(Date releaseDate) {
+            song.releaseDate = releaseDate;
+            return this;
+        }
+
+        public Builder setArtist(Artist artist) {
+            song.artist = artist;
+            return this;
+        }
+
+        public Song build() {
+            return song;
+        }
     }
 }

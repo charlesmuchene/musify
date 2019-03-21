@@ -8,7 +8,7 @@
         http://www.springframework.org/schema/rabbit/spring-rabbit.xsd">
 
     <!-- RabbitMQ Configurations -->
-    <rabbit:connection-factory id="connectionFactory2" host="localhost" username="joe" password="joe"/>
+    <rabbit:connection-factory id="connectionFactory2" host="localhost" username="guest" password="guest"/>
 
     <rabbit:queue name="FromBatchSong" durable="false" auto-delete="true" exclusive="false"/>
     <!--<rabbit:queue name="FromBatchChart" durable="false" auto-delete="true" exclusive="false"/>-->
@@ -20,14 +20,14 @@
         </rabbit:bindings>
     </rabbit:topic-exchange>
 
-    <!-- Get All Songs Or Charts from Batch -->
+     <!--Get All Songs Or Charts from Batch-->
     <rabbit:listener-container connection-factory="connectionFactory2">
-        <rabbit:listener ref="SongQueueListener" method="listen" queue-names="FromBatchSong"/>
+        <rabbit:listener ref="songQueueListener" method="listen" queue-names="FromBatchSong"/>
         <!--<rabbit:listener ref="ChartQueueListener" method="listen" queue-names="FromBatchChart"/>-->
     </rabbit:listener-container>
 
-    <bean id="ChartQueueListener" class="dev.cstv.musify.messaging.ChartQueueListener"/>
-    <bean id="SongQueueListener" class="dev.cstv.musify.messaging.SongQueueListener"/>
+    <bean id="chartQueueListener" class="dev.cstv.musify.messaging.ChartQueueListener"/>
+    <bean id="songQueueListener" class="dev.cstv.musify.messaging.SongQueueListener"/>
 
 
 
@@ -36,7 +36,7 @@
 
     <rabbit:direct-exchange name="mail">
         <rabbit:bindings>
-            <rabbit:binding queue="mailQueue" key="chart.mail"></rabbit:binding>
+            <rabbit:binding queue="mailQueue" key="chart.mail"/>
         </rabbit:bindings>
     </rabbit:direct-exchange>
 
