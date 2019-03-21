@@ -1,23 +1,16 @@
 package dev.cstv.musify.messaging.mail;
 
 import java.io.Serializable;
-import java.util.HashMap;
 import java.util.List;
 
 public class Mail implements Serializable {
 
-    private Object attachment;
-    private String receipient;
     private String receipientName;
     private String receipientEmail;
-    private String message;
     private String chartTitle;
     private List<String> songs;
 
-    private HashMap<String, String> receipients = new HashMap<>();
-
     public Mail() {
-
     }
 
     public Mail(String receipientName, String receipientEmail, String chartTitle, List<String> songs) {
@@ -27,52 +20,36 @@ public class Mail implements Serializable {
         this.songs = songs;
     }
 
-    public Mail(HashMap<String,String> receipients, String message) {
-        this.receipients = receipients;
-        this.message = message;
+    public String getReceipientName() {
+        return receipientName;
     }
 
-    public Mail(String receipient, String message) {
-        this.receipient = receipient;
-        this.message = message;
+    public void setReceipientName(String receipientName) {
+        this.receipientName = receipientName;
     }
 
-    public Mail(String receipient, String message, Object attachment) {
-        this.receipient = receipient;
-        this.message = message;
-        this.attachment = attachment;
+    public String getReceipientEmail() {
+        return receipientEmail;
     }
 
-    public String getReceipient() {
-        return receipient;
+    public void setReceipientEmail(String receipientEmail) {
+        this.receipientEmail = receipientEmail;
     }
 
-    public void setReceipient(String receipient) {
-        this.receipient = receipient;
+    public String getChartTitle() {
+        return chartTitle;
     }
 
-    public String getMessage() {
-        return message;
+    public void setChartTitle(String chartTitle) {
+        this.chartTitle = chartTitle;
     }
 
-    public void setMessage(String message) {
-        this.message = message;
+    public List<String> getSongs() {
+        return songs;
     }
 
-    public Object getAttachment() {
-        return attachment;
-    }
-
-    public void setAttachment(Object attachment) {
-        this.attachment = attachment;
-    }
-
-    public HashMap<String,String> getReceipients() {
-        return receipients;
-    }
-
-    public void addReceipient(String receipient,String name) {
-
-        this.receipients.put(receipient,name);
+    public void setSongs(List<String> songs) {
+        this.songs = songs;
     }
 }
+
