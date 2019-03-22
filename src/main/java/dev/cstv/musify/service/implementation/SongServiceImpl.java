@@ -49,6 +49,11 @@ public class SongServiceImpl implements SongService {
     }
 
     @Override
+    public Song findByTitle(String title) {
+        return songDao.findByTitle(title);
+    }
+    
+    @Override
     public Song play(Long id) {
 
         List<Chart> chartList = chartDao.findAll();

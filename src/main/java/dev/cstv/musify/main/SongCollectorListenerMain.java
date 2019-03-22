@@ -12,14 +12,11 @@ public class SongCollectorListenerMain {
 	private final static String[] configFilesGatewayDemo = {
 			"/context/applicationContext.xml",
 			 "/META-INF/spring/integration/common.xml",
-			 "/META-INF/spring/integration/songCollectorGateway.xml",
 			"/META-INF/spring/integration/jms-song-collector-app-context.xml" 
 			 
 	};
 
 	public static void main(String[] args) {
-
-		final Scanner scanner = new Scanner(System.in);
 
 		System.out.println("\n========================================================="
 				+ "\n                                                         "
@@ -33,7 +30,7 @@ public class SongCollectorListenerMain {
 	}
 
 	private void mainInternal(ApplicationContext applicationContext) {
-		// Wait for Messages
+		// Wait for Messages execute in SongCollectorMessageListener
 	}
 
 }

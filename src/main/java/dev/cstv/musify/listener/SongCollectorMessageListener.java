@@ -26,6 +26,7 @@ public class SongCollectorMessageListener implements MessageListener {
 	public void onMessage(Message message) {
 		System.out.println("Main App - Song Collector Listener - Message Received: ");
 		ObjectMessage objectMessage = (ObjectMessage) message;
+		
 		try {
 			SongOutput songOutput = (SongOutput) objectMessage.getObject();
 			System.out.println("     ReleaseDate: " + songOutput.getReleaseDate());
@@ -35,7 +36,12 @@ public class SongCollectorMessageListener implements MessageListener {
 			song.setUrl(songOutput.getItem().getUrl());
 			song.setReleaseDate(songOutput.getReleaseDate());
 			song.setDuration(1);
-			songService.save(song);
+			
+			if (songService.findByTitle(song.getTitle()) == null) {
+				songService.save(song);
+			} else {
+				System.out.println(song.getTitle() + " is existing in DB !!!");
+			}
 
 		} catch (JMSException e1) {
 			// TODO Auto-generated catch block
