@@ -69,10 +69,14 @@ public class Song {
     }
 
     public Long getId() {
-        return id;
-    }
+		return id;
+	}
 
-    public String getUrl() {
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public String getUrl() {
         return url;
     }
 

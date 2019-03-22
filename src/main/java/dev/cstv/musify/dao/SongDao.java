@@ -8,4 +8,6 @@ public interface SongDao extends GenericDao<Song> {
 
         public List<Song> findAllBySubSelect();
 
+		public Song findByTitle(String name);
+
 }

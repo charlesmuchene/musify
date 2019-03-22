@@ -17,4 +17,6 @@ public interface SongService {
 
     public Song play(Long id);
 
+    public Song findByTitle(String title);
+
 }
