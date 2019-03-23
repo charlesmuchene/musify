@@ -26,3 +26,5 @@
 - Run listener to retrieve data from data BUS and insert into system
 	/musify/src/main/java/dev/cstv/musify/main/SongCollectorListenerMain.java
 
+
+==> data will be inserted into cstv.song table
